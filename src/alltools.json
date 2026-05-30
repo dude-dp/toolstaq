@@ -1,0 +1,404 @@
+[
+    {
+        "category": "📄 PDF tools",
+        "tools": [
+            {
+                "tool_name": "PDF to Word converter",
+                "monthly_searches": "4.0M/mo",
+                "build_diff": "Hard",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Compress PDF",
+                "monthly_searches": "1.6M/mo",
+                "build_diff": "Medium",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Merge PDF",
+                "monthly_searches": "1.2M/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Split PDF",
+                "monthly_searches": "900K/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "JPG to PDF",
+                "monthly_searches": "1.0M/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "PDF to JPG",
+                "monthly_searches": "800K/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "PDF editor (annotate, highlight)",
+                "monthly_searches": "700K/mo",
+                "build_diff": "Hard",
+                "india": "High"
+            },
+            {
+                "tool_name": "Word to PDF",
+                "monthly_searches": "700K/mo",
+                "build_diff": "Medium",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Rotate PDF",
+                "monthly_searches": "400K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "PDF to Excel",
+                "monthly_searches": "600K/mo",
+                "build_diff": "Hard",
+                "india": "High"
+            },
+            {
+                "tool_name": "Watermark PDF",
+                "monthly_searches": "250K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Protect / Unlock PDF",
+                "monthly_searches": "280K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            }
+        ]
+    },
+    {
+        "category": "🖼 Image tools",
+        "tools": [
+            {
+                "tool_name": "Compress image / Photo compressor",
+                "monthly_searches": "1.3M/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Remove background from image",
+                "monthly_searches": "1.2M/mo",
+                "build_diff": "Medium",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Resize image",
+                "monthly_searches": "1.0M/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Convert image format (JPG↔PNG↔WebP)",
+                "monthly_searches": "900K/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Crop image",
+                "monthly_searches": "700K/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "Passport size photo maker",
+                "monthly_searches": "800K/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "GIF maker / Video to GIF",
+                "monthly_searches": "650K/mo",
+                "build_diff": "Medium",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Image colour picker",
+                "monthly_searches": "500K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Add text to image",
+                "monthly_searches": "480K/mo",
+                "build_diff": "Medium",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Image watermark",
+                "monthly_searches": "350K/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "Flip / Rotate image",
+                "monthly_searches": "280K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Meme generator",
+                "monthly_searches": "550K/mo",
+                "build_diff": "Medium",
+                "india": "🔥 High"
+            }
+        ]
+    },
+    {
+        "category": "⌨ Developer tools",
+        "tools": [
+            {
+                "tool_name": "JSON Formatter / Validator",
+                "monthly_searches": "2.0M/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "Base64 Encoder / Decoder",
+                "monthly_searches": "1.2M/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "Regex Tester with live match",
+                "monthly_searches": "900K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "QR Code Generator",
+                "monthly_searches": "1.5M/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "URL Encoder / Decoder",
+                "monthly_searches": "550K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "JWT Decoder",
+                "monthly_searches": "400K/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "UUID / ULID Generator",
+                "monthly_searches": "350K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Cron Expression Generator",
+                "monthly_searches": "320K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Diff Checker (text / JSON / code)",
+                "monthly_searches": "480K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Password Generator",
+                "monthly_searches": "650K/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "MD5 / SHA hash generator",
+                "monthly_searches": "400K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            }
+        ]
+    },
+    {
+        "category": "💰 Indian finance calculators",
+        "tools": [
+            {
+                "tool_name": "SIP Calculator",
+                "monthly_searches": "10M+/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "EMI Calculator (home / car / personal)",
+                "monthly_searches": "8M+/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "GST Calculator",
+                "monthly_searches": "5M+/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "Income Tax Calculator India",
+                "monthly_searches": "4M+/mo",
+                "build_diff": "Medium",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "FD / RD Maturity Calculator",
+                "monthly_searches": "3M+/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "HRA Calculator",
+                "monthly_searches": "2M+/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "CAGR Calculator",
+                "monthly_searches": "1.5M+/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "NPS / Retirement Calculator",
+                "monthly_searches": "1M+/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "Gratuity Calculator",
+                "monthly_searches": "800K/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            }
+        ]
+    },
+    {
+        "category": "📝 Text tools",
+        "tools": [
+            {
+                "tool_name": "Word Counter / Character Counter",
+                "monthly_searches": "900K/mo",
+                "build_diff": "Easy",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "Case Converter (upper/lower/title/camel)",
+                "monthly_searches": "600K/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "Lorem Ipsum Generator",
+                "monthly_searches": "550K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Text to Slug / URL converter",
+                "monthly_searches": "250K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Markdown to HTML Converter",
+                "monthly_searches": "350K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Number to Words (Indian system)",
+                "monthly_searches": "500K/mo",
+                "build_diff": "Easy",
+                "india": "🔥 India only"
+            },
+            {
+                "tool_name": "Roman Numeral Converter",
+                "monthly_searches": "300K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "Binary / Hex / Octal Converter",
+                "monthly_searches": "420K/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "Business Name Generator",
+                "monthly_searches": "850K/mo",
+                "build_diff": "Medium",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "AI Product Description Writer",
+                "monthly_searches": "550K/mo",
+                "build_diff": "Medium",
+                "india": "High"
+            },
+            {
+                "tool_name": "Resume Bullet Point Writer",
+                "monthly_searches": "600K/mo",
+                "build_diff": "Medium",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "AI Meta Description Generator",
+                "monthly_searches": "420K/mo",
+                "build_diff": "Medium",
+                "india": "High"
+            },
+            {
+                "tool_name": "AI Email Subject Line Generator",
+                "monthly_searches": "380K/mo",
+                "build_diff": "Medium",
+                "india": "Medium"
+            },
+            {
+                "tool_name": "AI Cover Letter Generator",
+                "monthly_searches": "700K/mo",
+                "build_diff": "Medium",
+                "india": "🔥 High"
+            }
+        ]
+    },
+    {
+        "category": "📈 SEO tools",
+        "tools": [
+            {
+                "tool_name": "Plagiarism Checker (basic)",
+                "monthly_searches": "5M+/mo",
+                "build_diff": "Hard",
+                "india": "🔥 High"
+            },
+            {
+                "tool_name": "XML Sitemap Generator",
+                "monthly_searches": "400K/mo",
+                "build_diff": "Medium",
+                "india": "High"
+            },
+            {
+                "tool_name": "Keyword Density Checker",
+                "monthly_searches": "350K/mo",
+                "build_diff": "Easy",
+                "india": "High"
+            },
+            {
+                "tool_name": "Robots.txt Generator",
+                "monthly_searches": "220K/mo",
+                "build_diff": "Easy",
+                "india": "Medium"
+            }
+        ]
+    }
+]
