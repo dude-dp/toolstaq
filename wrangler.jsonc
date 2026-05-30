@@ -1,5 +1,20 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "toolstaq",
-  "pages_build_output_dir": "./dist"
+  "main": "src/index.jsx",
+  "compatibility_date": "2026-05-30",
+  "compatibility_flags": ["nodejs_compat"],
+  
+  // Serves static files bypassing the Worker for free, instant delivery
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS"
+  },
+
+  // Schedules background tasks
+  "triggers": {
+    "crons": [
+      "0 0 * * *" // Runs every day at midnight UTC
+    ]
+  }
 }
