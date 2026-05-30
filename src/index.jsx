@@ -690,7 +690,20 @@ export { app }
 
 // HTTP handler and Cron handler export
 export default {
-  fetch: app.fetch,
+  async fetch(request, env, ctx) {
+    // 1. Try serving static assets first
+    try {
+      const response = await env.ASSETS.fetch(request);
+      if (response.status !== 404) {
+        return response;
+      }
+    } catch (e) {
+      // Fallback if ASSETS binding is not set
+    }
+
+    // 2. Fallback to Hono router
+    return app.fetch(request, env, ctx);
+  },
   
   scheduled: async (event, env, ctx) => {
     // Runs periodically based on wrangler.jsonc crons trigger
