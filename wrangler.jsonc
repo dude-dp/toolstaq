@@ -3,12 +3,5 @@
   "name": "toolstaq",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-05-30",
-  "compatibility_flags": ["nodejs_compat"],
-
-  // Cron triggers — Pages _worker.js supports scheduled events natively.
-  // The `scheduled` handler in src/index.jsx handles these.
-  // Syntax: cron expression strings (UTC).
-  "triggers": {
-    "crons": ["0 0 * * *"]
-  }
+  "compatibility_flags": ["nodejs_compat"]
 }
