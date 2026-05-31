@@ -8,15 +8,19 @@ export const Layout = (props) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>{props.title || "ToolStaq | Hyper-Fast Developer & Text Utilities"}</title>
       <meta name="description" content={props.description || "Stunning, privacy-first, zero-bloat developer and text tools running on the edge."} />
-      
+
       <meta property="og:type" content="website" />
       <meta property="og:title" content={props.title || "ToolStaq"} />
       <meta property="og:description" content={props.description || "Zero-bloat edge utilities."} />
-      
+
       <link rel="stylesheet" href="/style.css" />
 
+      {/* 💰 Google AdSense Publisher Script (Replace client ID when approved) */}
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
       {/* BLOCKING FOUC SCRIPT: Reads local storage before the browser paints */}
-      <script dangerouslySetInnerHTML={{ __html: `
+      <script dangerouslySetInnerHTML={{
+        __html: `
         (function() {
           try {
             var savedTheme = localStorage.getItem('theme');
@@ -29,12 +33,12 @@ export const Layout = (props) => (
       `}} />
     </head>
     <body>
-      <header>
+      <header>yes, help me start building out the SEO infrastructure (like dynamic meta tags and proper canonical URLs for each tool) to ensure you get the traffic needed to hit those AdSense goals
         <a href="/" class="logo-link" id="home-logo">
           <div class="logo-icon">T</div>
           <span>ToolStaq</span>
         </a>
-        
+
         <nav class="nav-links">
           <a href="/tools/json" class="nav-link">JSON Formatter</a>
           <a href="/tools/word-counter" class="nav-link">Word Counter</a>
@@ -60,7 +64,17 @@ export const Layout = (props) => (
           </svg>
         </button>
       </header>
-      
+
+      {/* Global Leaderboard Ad Slot (Can be disabled per-page via props) */}
+      {props.hideLeaderboard !== true && (
+        <div class="container" style="padding-top: var(--space-24); padding-bottom: 0;">
+          <div class="ad-container ad-leaderboard">
+            {/* AdSense `ins` tag goes here later */}
+            Ad Space (970x90 / Mobile Banner)
+          </div>
+        </div>
+      )}
+
       <main>
         {props.children}
       </main>
@@ -70,7 +84,8 @@ export const Layout = (props) => (
       </footer>
 
       {/* CLIENT-SIDE THEME HANDLER */}
-      <script dangerouslySetInnerHTML={{ __html: `
+      <script dangerouslySetInnerHTML={{
+        __html: `
         document.addEventListener('DOMContentLoaded', () => {
           const themeBtn = document.getElementById('theme-toggle');
           

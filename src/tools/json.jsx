@@ -67,6 +67,11 @@ export const JsonFormatterView = () => {
 
           {/* ── Info Sidebar ── */}
           <div class="info-sidebar">
+            
+            {/* Premium Sticky Ad Slot */}
+            <div class="ad-container ad-sidebar-square">
+              Sidebar Ad (300x250)
+            </div>
             <div class="sidebar-card">
               <h3>🔒 Privacy First</h3>
               <p>All formatting and validation run entirely in your browser. Your JSON data never leaves your device.</p>
