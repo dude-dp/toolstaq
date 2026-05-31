@@ -22,11 +22,6 @@
   --color-accent-focus: #e3170a;
   --color-accent-warning: #f9c80e;
 
-  /* --- Interactive --- */
-  --color-action-default: #279af1;
-  --color-action-hover: #1084da;
-  --color-action-active: #0d6eb8;
-
   /* --- Borders --- */
   --color-border-default: #080705;
   --color-border-muted: #e5e7eb;
@@ -146,7 +141,7 @@ header {
 }
 
 .logo-link:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
@@ -194,7 +189,7 @@ header {
 }
 
 .nav-link:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -257,9 +252,9 @@ header {
 }
 
 .search-input:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
-  border-color: var(--color-action-default);
+  border-color: var(--color-accent-focus);
 }
 
 /* Remove legacy outline: none — replaced by :focus-visible above */
@@ -312,7 +307,7 @@ header {
 }
 
 .filter-btn:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -358,7 +353,7 @@ header {
 }
 
 .tool-card:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -432,7 +427,7 @@ header {
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  color: var(--color-action-default);
+  color: var(--color-accent-focus);
   font-size: 13px;
 }
 
@@ -483,7 +478,7 @@ header {
 }
 
 .back-btn:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -558,8 +553,8 @@ select.search-input {
 
 .text-area:focus-visible,
 select.search-input:focus-visible {
-  border-color: var(--color-action-default);
-  outline: 2px solid var(--color-action-default);
+  border-color: var(--color-accent-focus);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -607,7 +602,7 @@ select.search-input:focus-visible {
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -619,14 +614,14 @@ select.search-input:focus-visible {
 
 /* Primary button — design system contract */
 .btn-primary {
-  background-color: var(--color-action-default);
+  background-color: var(--color-accent-focus);
   color: var(--color-text-on-dark);
   border: 2px solid var(--color-border-default);
   box-shadow: var(--shadow-neo);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: var(--color-action-hover);
+  background-color: var(--color-accent-focus);
   transform: translateY(-2px);
   box-shadow: 6px 6px 0px var(--color-border-default);
 }
@@ -750,7 +745,7 @@ pre.result-box {
   font-family: var(--font-sans);
   font-size: 32px;
   font-weight: 800;
-  color: var(--color-action-default);
+  color: var(--color-accent-focus);
   line-height: 1.1;
 }
 
@@ -774,7 +769,7 @@ pre.result-box {
 }
 
 .range-slider:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -783,7 +778,7 @@ pre.result-box {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: var(--color-action-default);
+  background-color: var(--color-accent-focus);
   border: 2px solid var(--color-border-default);
   cursor: pointer;
   box-shadow: var(--shadow-sm);
@@ -826,7 +821,7 @@ pre.result-box {
 }
 
 .checkbox-input {
-  accent-color: var(--color-action-default);
+  accent-color: var(--color-accent-focus);
   width: 18px;
   height: 18px;
   cursor: pointer;
@@ -835,7 +830,7 @@ pre.result-box {
 }
 
 .checkbox-input:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -921,7 +916,7 @@ footer {
 }
 
 .theme-btn:focus-visible {
-  outline: 2px solid var(--color-action-default);
+  outline: 2px solid var(--color-accent-focus);
   outline-offset: 2px;
 }
 
@@ -1013,7 +1008,7 @@ header {
 .ticker-item {
   height: 60px;
   font-weight: 800;
-  color: var(--color-action-default);
+  color: var(--color-accent-focus);
   white-space: nowrap;
 }
 
@@ -1047,7 +1042,7 @@ header {
 .category-card:hover {
   transform: translate(-3px, -3px);
   box-shadow: 8px 8px 0px var(--color-border-default);
-  border-color: var(--color-action-default);
+  border-color: var(--color-accent-focus);
 }
 
 .category-card.active {

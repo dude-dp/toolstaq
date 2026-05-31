@@ -33,11 +33,6 @@
   --color-accent-focus: #e3170a;
   --color-accent-warning: #f9c80e;
 
-  /* --- Interactive --- */
-  --color-action-default: #279af1;
-  --color-action-hover: #1084da;
-  --color-action-active: #0d6eb8;
-
   /* --- Borders --- */
   --color-border-default: #080705;
   --color-border-muted: #e5e7eb;
@@ -92,13 +87,13 @@ Apply these exact properties to their corresponding elements.
 When generating standard UI elements, strictly combine tokens as follows:
 
 ### Primary Button (Neo-Brutalist Style)
-*   **Base:** `background: var(--color-action-default); color: var(--color-text-on-dark); font-weight: 600; border: 1px solid var(--color-border-default); border-radius: var(--radius-sm); box-shadow: var(--shadow-neo); padding: var(--space-12) var(--space-24);`
-*   **Hover:** `background: var(--color-action-hover); transform: translateY(-2px); box-shadow: 6px 6px 0px #080705;`
-*   **Focus:** `outline: 2px solid var(--color-action-default); outline-offset: 2px;`
+*   **Base:** `background: var(--color-accent-focus); color: var(--color-text-on-dark); font-weight: 600; border: 1px solid var(--color-border-default); border-radius: var(--radius-sm); box-shadow: var(--shadow-neo); padding: var(--space-12) var(--space-24);`
+*   **Hover:** `background: var(--color-accent-focus); transform: translateY(-2px); box-shadow: 6px 6px 0px #080705;`
+*   **Focus:** `outline: 2px solid var(--color-accent-focus); outline-offset: 2px;`
 
 ### Text Inputs
 *   **Base:** `background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: var(--radius-sm); padding: var(--space-12) var(--space-16); color: var(--color-text-primary); font-size: 16px;`
-*   **Focus:** `border-color: var(--color-action-default); outline: 2px solid var(--color-action-default); outline-offset: 2px;`
+*   **Focus:** `border-color: var(--color-accent-focus); outline: 2px solid var(--color-accent-focus); outline-offset: 2px;`
 
 ### Data Output / Terminal Consoles
 *   **Mandatory Wrapper:** `background: var(--color-bg-console); color: var(--color-text-on-dark); font-family: var(--font-mono); font-size: 14px; line-height: 1.6; padding: var(--space-24); border-radius: var(--radius-none); overflow-x: auto;`
@@ -111,7 +106,7 @@ When generating standard UI elements, strictly combine tokens as follows:
 
 ## 5. ACCESSIBILITY (a11y) RULES
 
-1. **Blue Text Constraint:** `--color-action-default` (#279af1) fails AA contrast on white for small text. **MUST ONLY** be used for large text (18px+), interactive components (buttons, inputs), or UI graphics. NEVER use `--color-action-default` for standard 16px paragraph text links; use `--color-text-primary` with an underline instead.
-2. **Focus Visibility:** Every interactive element (`<button>`, `<a>`, `<input>`, `<textarea>`) MUST have a `:focus-visible` state using `outline: 2px solid var(--color-action-default); outline-offset: 2px;`.
+1. **Accent/Focus Usage:** `--color-accent-focus` (#e3170a) can be used for interactive components (buttons, inputs), hero accents, or UI graphics.
+2. **Focus Visibility:** Every interactive element (`<button>`, `<a>`, `<input>`, `<textarea>`) MUST have a `:focus-visible` state using `outline: 2px solid var(--color-accent-focus); outline-offset: 2px;`.
 3. **Motion:** If implementing transitions (like the button hover), wrap them in `@media (prefers-reduced-motion: no-preference)` to respect user OS settings.
 ```
