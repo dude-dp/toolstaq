@@ -39,14 +39,14 @@ app.get('/', (c) => {
             </ul>
           </div>
         </h1>
-        <p style="font-size: var(--font-size-body); color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">
+        <p style="font-size: 16px; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">
           Privacy-first, edge-rendered developer utilities. Zero hydration payload tracking, zero background processing lags.
         </p>
       </section>
 
       {/* 2. CORE CATEGORIES ARCHITECTURE GRID */}
       <section>
-        <h2 style="font-size: var(--font-size-h3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-4);">
+        <h2 style="font-size: 28px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-4);">
           Select Category Array
         </h2>
         <div class="categories-container">
@@ -62,10 +62,10 @@ app.get('/', (c) => {
       {/* 3. DYNAMIC TOOLS COMPILATION WORKSPACE PANEL */}
       <section id="tools-display-panel" style="display: none; padding-top: var(--space-4);">
         <div class="tools-workspace-header">
-          <h2 id="active-category-title" style="font-size: var(--font-size-h2); font-weight: 800; margin: 0;">
+          <h2 id="active-category-title" style="font-size: 36px; font-weight: 800; margin: 0;">
             Utilities Portfolio
           </h2>
-          <span style="font-size: var(--font-size-caption); font-weight: 700; color: var(--color-action-default); background: var(--color-bg-secondary); padding: 4px 12px; border: 2px solid var(--color-border-default);">
+          <span style="font-size: 14px; font-weight: 700; color: var(--color-action-default); background: var(--color-bg-secondary); padding: 4px 12px; border: 2px solid var(--color-border-default);">
             ACTIVE SELECTION
           </span>
         </div>
