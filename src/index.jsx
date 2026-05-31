@@ -1,145 +1,139 @@
 /** @jsxRuntime automatic */
 /** @jsxImportSource hono/jsx */
 import { Hono } from 'hono'
-import toolsData from './alltools.json'
 import { Layout } from './components/Layout.jsx'
 import { JsonFormatterView } from './tools/json.jsx'
 
 const app = new Hono()
 
-// Mapping implemented tools to their relative URLs
-const IMPLEMENTED_TOOLS = {
-  "JSON Formatter / Validator": "/tools/json",
-  "Word Counter / Character Counter": "/tools/word-counter",
-  "Base64 Encoder / Decoder": "/tools/base64",
-  "UUID / ULID Generator": "/tools/uuid-generator",
-  "Password Generator": "/tools/password-generator"
-}
+// Root Tool Registry Data Model
+const toolsData = [
+  { id: "json", name: "JSON Formatter", desc: "Format, compress, and check parse validation arrays.", cat: "developer", path: "/tools/json", status: "live" },
+  { id: "base64", name: "Base64 Encoder", desc: "Convert files and text payload fragments securely.", cat: "developer", path: "/tools/base64", status: "live" },
+  { id: "word-counter", name: "Word Counter", desc: "Analyze characters, sentences, reading duration indexes.", cat: "utilities", path: "/tools/word-counter", status: "live" },
+  { id: "password-gen", name: "Password Generator", desc: "Compile highly randomized cryptographic security sequences.", cat: "security", path: "/tools/password-generator", status: "live" },
+  { id: "uuid-generator", name: "UUID / ULID Generator", desc: "Generate cryptographically secure random UUID or sortable ULID keys.", cat: "security", path: "/tools/uuid-generator", status: "live" },
+  { id: "jwt-decoder", name: "JWT Debugger", desc: "Decode cryptographically compiled web token fragments.", cat: "security", path: "#", status: "coming-soon" },
+  { id: "regex-tester", name: "Regex Validator", desc: "Write and parse matching test expressions natively.", cat: "utilities", path: "#", status: "coming-soon" }
+]
 
+const categories = [
+  { id: "developer", name: "Developer Tools", desc: "JSON configurations, parsers, and stream format engines." },
+  { id: "utilities", name: "Text Utilities", desc: "Analysis frameworks, counting arrays, mutation matrices." },
+  { id: "security", name: "Security & Encryption", desc: "Cryptographic payload encoders, passwords, token decoders." }
+]
 
-// Homepage: Dynamic Tools Hub
 app.get('/', (c) => {
   return c.html(
-    <Layout title="ToolStaq | Developer & Text Utilities Hub" description="Explore a collection of ultra-fast developer utilities, financial calculators, and text formatting tools running instantly on the edge.">
-      <div class="hero">
-        <h1>All Utilities, No Bloat.</h1>
-        <p>Privacy-first, supercharged developer and text tools rendered instantly at the edge with zero client-side frameworks.</p>
-        
-        <div class="search-container">
-          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input 
-            type="text" 
-            class="search-input" 
-            placeholder="Search over 40+ tools..." 
-            id="tool-search"
-            autocomplete="off"
-          />
-        </div>
-      </div>
+    <Layout title="ToolStaq | Instant Developer Tools Hub">
+      {/* 1. ANIMATED HERO CAROUSEL / TICKER SECTION */}
+      <section class="hero-container">
+        <h1 class="hero-title">
+          All your developer tools for
+          <div class="ticker-wrapper">
+            <ul class="ticker-list">
+              <li class="ticker-item">JSON Parsing</li>
+              <li class="ticker-item">Data Encryption</li>
+              <li class="ticker-item">Text Analytics</li>
+              <li class="ticker-item">JSON Parsing</li> {/* Duplicate terminal element for seamless looping animation */}
+            </ul>
+          </div>
+        </h1>
+        <p style="font-size: var(--font-size-body); color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">
+          Privacy-first, edge-rendered developer utilities. Zero hydration payload tracking, zero background processing lags.
+        </p>
+      </section>
 
-      <div class="container" style="padding-top: 0;">
-        <div class="categories-filter" id="categories-bar">
-          <button class="filter-btn active" data-category="all">All Tools</button>
-          {toolsData.map(cat => (
-            <button class="filter-btn" data-category={cat.category}>{cat.category}</button>
+      {/* 2. CORE CATEGORIES ARCHITECTURE GRID */}
+      <section>
+        <h2 style="font-size: var(--font-size-h3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-4);">
+          Select Category Array
+        </h2>
+        <div class="categories-container">
+          {categories.map((category) => (
+            <div class="category-card" data-category-target={category.id} role="button" tabindex="0">
+              <h3>{category.name}</h3>
+              <p>{category.desc}</p>
+            </div>
           ))}
         </div>
+      </section>
 
-        <div class="tools-grid" id="tools-container">
-          {toolsData.flatMap(cat => 
-            cat.tools.map(tool => {
-              const url = IMPLEMENTED_TOOLS[tool.tool_name] || "#";
-              const isImplemented = !!IMPLEMENTED_TOOLS[tool.tool_name];
-              
-              return (
-                <a 
-                  href={url} 
-                  class={`tool-card ${!isImplemented ? 'coming-soon-card' : ''}`}
-                  data-name={tool.tool_name.toLowerCase()}
-                  data-category={cat.category}
-                  onclick={!isImplemented ? "showComingSoon(event, '" + tool.tool_name + "')" : ""}
-                  id={`tool-${tool.tool_name.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase()}`}
-                >
-                  <div class="tool-header">
-                    <span class="tool-icon-wrapper">
-                      {cat.category.split(' ')[0]}
-                    </span>
-                    <span class="tool-badge" style={isImplemented ? "color:#10b981;border-color:rgba(16,185,129,0.2);" : "color:#94a3b8;"}>
-                      {isImplemented ? "Active" : "Soon"}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 class="tool-name">{tool.tool_name}</h3>
-                    <p class="tool-desc">
-                      {isImplemented 
-                        ? `Format, validate, or convert your data instantly with our edge-powered ${tool.tool_name.toLowerCase()}.` 
-                        : `High performance ${tool.tool_name.toLowerCase()} tool scheduled for the next release.`}
-                    </p>
-                  </div>
-                  <div class="tool-footer">
-                    <span class="tool-searches">
-                      🔥 {tool.monthly_searches}
-                    </span>
-                    <span class="tool-diff">
-                      {tool.build_diff}
-                    </span>
-                  </div>
-                </a>
-              )
-            })
-          )}
+      {/* 3. DYNAMIC TOOLS COMPILATION WORKSPACE PANEL */}
+      <section id="tools-display-panel" style="display: none; padding-top: var(--space-4);">
+        <div class="tools-workspace-header">
+          <h2 id="active-category-title" style="font-size: var(--font-size-h2); font-weight: 800; margin: 0;">
+            Utilities Portfolio
+          </h2>
+          <span style="font-size: var(--font-size-caption); font-weight: 700; color: var(--color-action-default); background: var(--color-bg-secondary); padding: 4px 12px; border: 2px solid var(--color-border-default);">
+            ACTIVE SELECTION
+          </span>
         </div>
-      </div>
 
-      {/* Embedded Client-side search, filter and coming soon popup */}
+        <div class="tools-grid">
+          {toolsData.map((tool) => (
+            <div class={`tool-card tool-item-card data-cat-${tool.cat}`} data-status={tool.status}>
+              <div class="tool-card-header">
+                <span class={`tool-badge ${tool.status === 'coming-soon' ? 'coming-soon' : ''}`}>
+                  {tool.status === 'live' ? 'EDGE LIVE' : 'PIPELINE'}
+                </span>
+              </div>
+              <h3 class="tool-card-title">{tool.name}</h3>
+              <p class="tool-card-desc">{tool.desc}</p>
+              {tool.status === 'live' ? (
+                <a href={tool.path} class="tool-card-btn">Launch Workspace</a>
+              ) : (
+                <button onclick="alert('Tool integration pipeline active. Scheduled for upcoming edge deployment loop.')" class="tool-card-btn" style="opacity: 0.5; cursor: not-allowed;">
+                  In Development
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. CLIENT-SIDE LIGHTWEIGHT WORKSPACE ROUTER */}
       <script dangerouslySetInnerHTML={{ __html: `
-        const searchInput = document.getElementById('tool-search');
-        const filterBtns = document.querySelectorAll('#categories-bar .filter-btn');
-        const toolCards = document.querySelectorAll('#tools-container .tool-card');
-        
-        let currentCategory = 'all';
-        let searchQuery = '';
+        document.addEventListener('DOMContentLoaded', () => {
+          const cards = document.querySelectorAll('.category-card');
+          const workspace = document.getElementById('tools-display-panel');
+          const workspaceTitle = document.getElementById('active-category-title');
+          const allToolItems = document.querySelectorAll('.tool-item-card');
 
-        function updateFilter() {
-          toolCards.forEach(card => {
-            const name = card.getAttribute('data-name');
-            const category = card.getAttribute('data-category');
-            
-            const matchesSearch = name.includes(searchQuery);
-            const matchesCategory = currentCategory === 'all' || category === currentCategory;
-            
-            if (matchesSearch && matchesCategory) {
-              card.style.display = 'flex';
-            } else {
-              card.style.display = 'none';
-            }
+          cards.forEach(card => {
+            card.addEventListener('click', () => {
+              const selectedCat = card.getAttribute('data-category-target');
+              
+              // Handle active states on current category grid elements
+              cards.forEach(c => c.classList.remove('active'));
+              card.classList.add('active');
+
+              // Update panel layout headings dynamically
+              const elementHeading = card.querySelector('h3').textContent;
+              workspaceTitle.textContent = elementHeading;
+
+              // Display the container seamlessly
+              workspace.style.display = 'block';
+
+              // Map filtering over nested utility references
+              allToolItems.forEach(tool => {
+                if(tool.classList.contains('data-cat-' + selectedCat)) {
+                  tool.classList.add('visible');
+                } else {
+                  tool.classList.remove('visible');
+                }
+              });
+
+              // Fluid window alignment adjustments for smaller viewport profiles
+              workspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
           });
-        }
-
-        searchInput.addEventListener('input', (e) => {
-          searchQuery = e.target.value.toLowerCase().trim();
-          updateFilter();
         });
-
-        filterBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentCategory = btn.getAttribute('data-category');
-            updateFilter();
-          });
-        });
-
-        function showComingSoon(e, name) {
-          e.preventDefault();
-          alert(\`\\"\${name}\\" is on our roadmap and will be deployed soon! We are prioritizing tools by search volume.\`);
-        }
-      ` }} />
+      `}} />
     </Layout>
   )
 })
+
 
 // Tool 1: JSON Formatter & Validator
 app.get('/tools/json', (c) => {
