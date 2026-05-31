@@ -105,7 +105,7 @@ When generating standard UI elements, strictly combine tokens as follows:
 *   *Highlighting keys/strings inside console:* Use `color: var(--color-accent-warning);`
 
 ### Informational Cards
-*   **Base:** `background: var(--color-bg-secondary); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: var(--space-24);`
+*   **Base:** `background: var(--color-accent-warning); border: 2px solid var(--color-border-default); border-radius: var(--radius-lg); box-shadow: var(--shadow-neo); padding: var(--space-32);`
 
 ---
 

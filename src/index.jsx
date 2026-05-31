@@ -3,30 +3,18 @@
 import { Hono } from 'hono'
 import { Layout } from './components/Layout.jsx'
 import { JsonFormatterView } from './tools/json.jsx'
+import toolsDataRaw from './alltools.json' // Import the unified dataset
 
 const app = new Hono()
 
-// Root Tool Registry Data Model
-const toolsData = [
-  { id: "json", name: "JSON Formatter", desc: "Format, compress, and check parse validation arrays.", cat: "developer", path: "/tools/json", status: "live" },
-  { id: "base64", name: "Base64 Encoder", desc: "Convert files and text payload fragments securely.", cat: "developer", path: "/tools/base64", status: "live" },
-  { id: "word-counter", name: "Word Counter", desc: "Analyze characters, sentences, reading duration indexes.", cat: "utilities", path: "/tools/word-counter", status: "live" },
-  { id: "password-gen", name: "Password Generator", desc: "Compile highly randomized cryptographic security sequences.", cat: "security", path: "/tools/password-generator", status: "live" },
-  { id: "uuid-generator", name: "UUID / ULID Generator", desc: "Generate cryptographically secure random UUID or sortable ULID keys.", cat: "security", path: "/tools/uuid-generator", status: "live" },
-  { id: "jwt-decoder", name: "JWT Debugger", desc: "Decode cryptographically compiled web token fragments.", cat: "security", path: "#", status: "coming-soon" },
-  { id: "regex-tester", name: "Regex Validator", desc: "Write and parse matching test expressions natively.", cat: "utilities", path: "#", status: "coming-soon" }
-]
-
-const categories = [
-  { id: "developer", name: "Developer Tools", desc: "JSON configurations, parsers, and stream format engines." },
-  { id: "utilities", name: "Text Utilities", desc: "Analysis frameworks, counting arrays, mutation matrices." },
-  { id: "security", name: "Security & Encryption", desc: "Cryptographic payload encoders, passwords, token decoders." }
-]
+// Destructure the arrays for easy mapping
+const { categories, tools: toolsData } = toolsDataRaw
 
 app.get('/', (c) => {
   return c.html(
     <Layout title="ToolStaq | Instant Developer Tools Hub">
-      {/* 1. ANIMATED HERO CAROUSEL / TICKER SECTION */}
+      
+      {/* 1. HERO - Massive vertical padding */}
       <section class="hero-container">
         <h1 class="hero-title">
           All your developer tools for
@@ -35,19 +23,19 @@ app.get('/', (c) => {
               <li class="ticker-item">JSON Parsing</li>
               <li class="ticker-item">Data Encryption</li>
               <li class="ticker-item">Text Analytics</li>
-              <li class="ticker-item">JSON Parsing</li> {/* Duplicate terminal element for seamless looping animation */}
+              <li class="ticker-item">JSON Parsing</li>
             </ul>
           </div>
         </h1>
-        <p style="font-size: 16px; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">
+        <p style="font-size: 18px; line-height: 1.6; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">
           Privacy-first, edge-rendered developer utilities. Zero hydration payload tracking, zero background processing lags.
         </p>
       </section>
 
-      {/* 2. CORE CATEGORIES ARCHITECTURE GRID */}
-      <section>
-        <h2 style="font-size: 28px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-4);">
-          Select Category Array
+      {/* 2. CATEGORIES */}
+      <section class="container" style="margin-top: var(--space-48);">
+        <h2 style="font-size: 20px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-24); color: var(--color-text-secondary); font-weight: 700;">
+          Select a Workspace
         </h2>
         <div class="categories-container">
           {categories.map((category) => (
@@ -59,13 +47,13 @@ app.get('/', (c) => {
         </div>
       </section>
 
-      {/* 3. DYNAMIC TOOLS COMPILATION WORKSPACE PANEL */}
-      <section id="tools-display-panel" style="display: none; padding-top: var(--space-4);">
+      {/* 3. DYNAMIC TOOLS PANEL */}
+      <section id="tools-display-panel" class="container" style="display: none; padding-bottom: var(--space-64);">
         <div class="tools-workspace-header">
           <h2 id="active-category-title" style="font-size: 36px; font-weight: 800; margin: 0;">
             Utilities Portfolio
           </h2>
-          <span style="font-size: 14px; font-weight: 700; color: var(--color-action-default); background: var(--color-bg-secondary); padding: 4px 12px; border: 2px solid var(--color-border-default);">
+          <span class="tool-badge" style="background: var(--color-bg-secondary); border-color: var(--color-action-default); color: var(--color-action-default);">
             ACTIVE SELECTION
           </span>
         </div>
@@ -73,26 +61,41 @@ app.get('/', (c) => {
         <div class="tools-grid">
           {toolsData.map((tool) => (
             <div class={`tool-card tool-item-card data-cat-${tool.cat}`} data-status={tool.status}>
-              <div class="tool-card-header">
-                <span class={`tool-badge ${tool.status === 'coming-soon' ? 'coming-soon' : ''}`}>
+              
+              {/* Added flex layout for header to support the Search Volume Badge */}
+              <div class="tool-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-16);">
+                <span class={`tool-badge ${tool.status === 'coming-soon' ? 'coming-soon' : ''}`} style={tool.status === 'live' ? "color:#10b981;border-color:rgba(16,185,129,0.2);" : "color:#94a3b8;"}>
                   {tool.status === 'live' ? 'EDGE LIVE' : 'PIPELINE'}
                 </span>
+                
+                {/* Search Volume Badge (Pulled from JSON) */}
+                {tool.searches && (
+                  <span style="font-size: 13px; font-weight: 700; color: var(--color-accent-warning); display: flex; align-items: center; gap: 4px; opacity: 0.9;">
+                    🔥 {tool.searches}
+                  </span>
+                )}
               </div>
-              <h3 class="tool-card-title">{tool.name}</h3>
-              <p class="tool-card-desc">{tool.desc}</p>
-              {tool.status === 'live' ? (
-                <a href={tool.path} class="tool-card-btn">Launch Workspace</a>
-              ) : (
-                <button onclick="alert('Tool integration pipeline active. Scheduled for upcoming edge deployment loop.')" class="tool-card-btn" style="opacity: 0.5; cursor: not-allowed;">
-                  In Development
-                </button>
-              )}
+              
+              <div style="flex-grow: 1;">
+                <h3 class="tool-name" style="margin-top: 0;">{tool.name}</h3>
+                <p class="tool-desc" style="line-height: 1.6;">{tool.desc}</p>
+              </div>
+              
+              <div class="tool-footer" style="margin-top: var(--space-24); border-top: none;">
+                {tool.status === 'live' ? (
+                  <a href={tool.path} class="btn btn-primary" style="width: 100%; justify-content: center;">Launch Workspace</a>
+                ) : (
+                  <button onclick={`alert('The ${tool.name} integration pipeline is active and scheduled for edge deployment.')`} class="btn" style="width: 100%; justify-content: center; opacity: 0.5; cursor: not-allowed;">
+                    In Development
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 4. CLIENT-SIDE LIGHTWEIGHT WORKSPACE ROUTER */}
+      {/* Script logic for seamless category switching */}
       <script dangerouslySetInnerHTML={{ __html: `
         document.addEventListener('DOMContentLoaded', () => {
           const cards = document.querySelectorAll('.category-card');
@@ -104,28 +107,27 @@ app.get('/', (c) => {
             card.addEventListener('click', () => {
               const selectedCat = card.getAttribute('data-category-target');
               
-              // Handle active states on current category grid elements
               cards.forEach(c => c.classList.remove('active'));
               card.classList.add('active');
 
-              // Update panel layout headings dynamically
               const elementHeading = card.querySelector('h3').textContent;
               workspaceTitle.textContent = elementHeading;
 
-              // Display the container seamlessly
               workspace.style.display = 'block';
 
-              // Map filtering over nested utility references
+              let visibleCount = 0;
               allToolItems.forEach(tool => {
                 if(tool.classList.contains('data-cat-' + selectedCat)) {
                   tool.classList.add('visible');
+                  visibleCount++;
                 } else {
                   tool.classList.remove('visible');
                 }
               });
 
-              // Fluid window alignment adjustments for smaller viewport profiles
-              workspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              // Scroll to grid smoothly
+              const y = workspace.getBoundingClientRect().top + window.scrollY - 100;
+              window.scrollTo({top: y, behavior: 'smooth'});
             });
           });
         });
