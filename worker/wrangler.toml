@@ -1,0 +1,18 @@
+name            = "toolstaq-worker"
+main            = "index.js"
+compatibility_date = "2026-05-30"
+compatibility_flags = ["nodejs_compat"]
+
+# ── Scheduled tasks ──────────────────────────────────────────────────────────
+# This is the cron-capable companion to the toolstaq Pages project.
+# Cloudflare Pages does NOT support cron triggers natively; this Worker does.
+[triggers]
+crons = ["0 0 * * *"]  # Daily at midnight UTC
+
+# ── Service Binding ──────────────────────────────────────────────────────────
+# Binds this Worker to the toolstaq Pages project so it can make internal
+# subrequests to the Pages site without going over the public internet.
+# Replace "toolstaq" with the exact name shown in your Pages dashboard if it differs.
+[[services]]
+binding = "PAGES_SITE"
+service = "toolstaq"

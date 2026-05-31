@@ -2,9 +2,11 @@
   "name": "toolstaq",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler pages dev dist",
     "build": "node build.js",
-    "deploy": "wrangler deploy --minify",
+    "deploy:pages": "npm run build && wrangler pages deploy dist",
+    "deploy:worker": "wrangler deploy --config worker/wrangler.toml --minify",
+    "dev:worker": "wrangler dev --config worker/wrangler.toml",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
