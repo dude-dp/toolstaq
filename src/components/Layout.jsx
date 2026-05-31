@@ -33,7 +33,7 @@ export const Layout = (props) => (
       `}} />
     </head>
     <body>
-      <header>yes, help me start building out the SEO infrastructure (like dynamic meta tags and proper canonical URLs for each tool) to ensure you get the traffic needed to hit those AdSense goals
+      <header>
         <a href="/" class="logo-link" id="home-logo">
           <div class="logo-icon">T</div>
           <span>ToolStaq</span>
@@ -79,8 +79,15 @@ export const Layout = (props) => (
         {props.children}
       </main>
 
-      <footer>
-        <p class="footer-text">© {new Date().getFullYear()} ToolStaq.online. Powered by Cloudflare Workers and Hono JSX.</p>
+      <footer style="margin-top: var(--space-48); border-top: 2px solid var(--color-border-muted); padding: var(--space-32) 0;">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: var(--space-16);">
+          <div class="footer-links" style="display: flex; gap: var(--space-24); flex-wrap: wrap; justify-content: center;">
+            <a href="/privacy" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px;">Privacy Policy</a>
+            <a href="/terms" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px;">Terms of Service</a>
+            <a href="/contact" style="color: var(--color-text-secondary); text-decoration: none; font-size: 14px;">Contact Us</a>
+          </div>
+          <p class="footer-text" style="margin: 0;">© {new Date().getFullYear()} ToolStaq.online. Powered by Cloudflare Workers and Hono JSX.</p>
+        </div>
       </footer>
 
       {/* CLIENT-SIDE THEME HANDLER */}

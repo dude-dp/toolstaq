@@ -72,17 +72,40 @@ export const JsonFormatterView = () => {
             <div class="ad-container ad-sidebar-square">
               Sidebar Ad (300x250)
             </div>
+
+            <div class="sidebar-card">
+              <h3>What is JSON?</h3>
+              <p>JSON (JavaScript Object Notation) is a lightweight, human-readable data interchange format. Originally derived from JavaScript, it has become the universal standard for transmitting structured data across APIs, configuration files, and web services.</p>
+              <p style="margin-top: 8px;">A valid JSON document must have a single root element — either an object (curly braces <code>{`{}`}</code>) or an array (square brackets <code>[]</code>). Keys must be double-quoted strings, and values can be strings, numbers, booleans, <code>null</code>, objects, or arrays.</p>
+            </div>
+
+            <div class="sidebar-card">
+              <h3>Why Format JSON?</h3>
+              <p>Raw JSON from APIs is typically minified — stripped of all whitespace to reduce payload size. While efficient for machines, minified JSON is nearly impossible for humans to read or debug. A JSON formatter (also called a JSON beautifier or JSON prettifier) adds indentation and line breaks to restore the hierarchical structure.</p>
+              <p style="margin-top: 8px;">Our formatter supports 2-space, 4-space, and tab indentation so your output matches your team's coding style guide perfectly.</p>
+            </div>
+
+            <div class="sidebar-card">
+              <h3>JSON Validation Explained</h3>
+              <p>JSON is strict by design. Common validation errors include:</p>
+              <ul style="margin-left: 16px; margin-top: 6px; line-height: 1.8;">
+                <li>Trailing commas after the last property</li>
+                <li>Single quotes instead of double quotes around keys</li>
+                <li>Unescaped special characters inside strings</li>
+                <li>Missing commas between properties</li>
+                <li>Comments (JSON does not support <code>// comments</code>)</li>
+              </ul>
+              <p style="margin-top: 8px;">ToolStaq's validator uses the browser's native <code>JSON.parse()</code> engine, which reports the exact character position of any syntax error.</p>
+            </div>
+
             <div class="sidebar-card">
               <h3>🔒 Privacy First</h3>
-              <p>All formatting and validation run entirely in your browser. Your JSON data never leaves your device.</p>
+              <p>All processing runs client-side inside your browser tab using the V8 JavaScript engine. Your JSON payload — which may contain API keys, database records, or private user data — is never transmitted to any server. There are no logs, no storage, and no third-party data sharing.</p>
             </div>
+
             <div class="sidebar-card">
-              <h3>⚡ Instant Speed</h3>
-              <p>Client-side V8-powered parsing delivers sub-millisecond results with zero network round-trips.</p>
-            </div>
-            <div class="sidebar-card">
-              <h3>🛠️ Modes</h3>
-              <p>Beautify with 2-space, 4-space, or tab indentation — or minify to a compact single line.</p>
+              <h3>Minify vs Beautify</h3>
+              <p>Use <strong>Beautify</strong> when debugging API responses, reading configuration files, or reviewing data from a database export. Use <strong>Minify</strong> before embedding JSON into source code, environment variables, or HTTP request bodies to reduce byte size and improve transfer speed.</p>
             </div>
           </div>
         </div>
