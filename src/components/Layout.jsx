@@ -15,8 +15,8 @@ export const Layout = (props) => (
 
       <link rel="stylesheet" href="/style.css" />
 
-      {/* 💰 Google AdSense Publisher Script (Replace client ID when approved) */}
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+      {/* 💰 Google AdSense Publisher Script */}
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5823178475198610" crossorigin="anonymous"></script>
 
       {/* BLOCKING FOUC SCRIPT: Reads local storage before the browser paints */}
       <script dangerouslySetInnerHTML={{
