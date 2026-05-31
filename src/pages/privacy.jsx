@@ -17,9 +17,9 @@ export const PrivacyPolicyView = () => {
              <p>We use third-party advertising companies, including Google, to serve ads when you visit our website. These companies may use cookies to serve ads based on your prior visits to this website or other websites.</p>
              <ul style="margin-left: var(--space-24); margin-bottom: var(--space-16);">
                <li>Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to ToolStaq and/or other sites on the Internet.</li>
-               <li>Users may opt out of personalized advertising by visiting <a href="https://myadcenter.google.com/" target="_blank" rel="noopener" style="color: var(--color-accent-primary); text-decoration: underline;">Google Ads Settings</a>.</li>
+               <li>Users may opt out of personalized advertising by visiting <a href="https://myadcenter.google.com/" target="_blank" rel="noopener" style="color: var(--color-accent-focus); text-decoration: underline;">Google Ads Settings</a>.</li>
              </ul>
-             <p>For more information on how Google uses data when you use our partners' sites or apps, please visit <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener" style="color: var(--color-accent-primary); text-decoration: underline;">Google's Privacy &amp; Terms</a>.</p>
+             <p>For more information on how Google uses data when you use our partners' sites or apps, please visit <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener" style="color: var(--color-accent-focus); text-decoration: underline;">Google's Privacy &amp; Terms</a>.</p>
           </div>
         </div>
       </div>

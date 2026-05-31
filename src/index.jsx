@@ -37,7 +37,10 @@ app.get('/', (c) => {
           Privacy-first, edge-rendered developer utilities. Zero hydration payload tracking, zero background processing lags.
         </p>
         <div style="display: flex; justify-content: center; gap: var(--space-16);">
-          <a href="#popular-tools" class="btn btn-primary" style="font-size: 18px;">Explore All Tools</a>
+          <a href="#popular-tools" class="btn btn-primary" style="font-size: 18px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="compass" style="width: 20px; height: 20px;"></i>
+            Explore All Tools
+          </a>
         </div>
       </section>
 
@@ -59,15 +62,10 @@ app.get('/', (c) => {
                   {/* The Tool Card */}
                   <div class={`tool-card tool-item-card data-cat-${tool.cat}`} data-status={tool.status} style="display: flex;">
                     <div class="tool-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-16);">
-                      <span class={`tool-badge ${tool.status === 'coming-soon' ? 'coming-soon' : ''}`} style={tool.status === 'live' ? "color:#10b981;border-color:rgba(16,185,129,0.2);" : "color:#94a3b8;"}>
+                      <span class={`tool-badge ${tool.status === 'coming-soon' ? 'coming-soon' : ''}`} style={tool.status === 'live' ? "display: flex; align-items: center; gap: 4px; color:#10b981;border-color:rgba(16,185,129,0.2);" : "display: flex; align-items: center; gap: 4px; color:#94a3b8;"}>
+                        {tool.status === 'live' ? <i data-lucide="zap" style="width: 14px; height: 14px;"></i> : <i data-lucide="clock" style="width: 14px; height: 14px;"></i>}
                         {tool.status === 'live' ? 'EDGE LIVE' : 'PIPELINE'}
                       </span>
-
-                      {tool.searches && (
-                        <span style="font-size: 13px; font-weight: 700; color: var(--color-accent-warning); display: flex; align-items: center; gap: 4px; opacity: 0.9;">
-                          🔥 {tool.searches}
-                        </span>
-                      )}
                     </div>
 
                     <div style="flex-grow: 1;">
@@ -77,9 +75,13 @@ app.get('/', (c) => {
 
                     <div class="tool-footer" style="margin-top: var(--space-24); border-top: none;">
                       {tool.status === 'live' ? (
-                        <a href={tool.path} class="btn btn-primary" style="width: 100%; justify-content: center;">Launch Workspace</a>
+                        <a href={tool.path} class="btn btn-primary" style="width: 100%; justify-content: center; display: flex; align-items: center; gap: 8px;">
+                          <i data-lucide="play" style="width: 18px; height: 18px;"></i>
+                          Launch Workspace
+                        </a>
                       ) : (
-                        <button onclick={`alert('The ${tool.name} integration pipeline is active and scheduled for edge deployment.')`} class="btn" style="width: 100%; justify-content: center; opacity: 0.5; cursor: not-allowed;">
+                        <button onclick={`alert('The ${tool.name} integration pipeline is active and scheduled for edge deployment.')`} class="btn" style="width: 100%; justify-content: center; display: flex; align-items: center; gap: 8px; opacity: 0.5; cursor: not-allowed;">
+                          <i data-lucide="hammer" style="width: 18px; height: 18px;"></i>
                           In Development
                         </button>
                       )}
@@ -736,6 +738,37 @@ app.get('/tools/password-generator', (c) => {
     </Layout>
   )
 })
+
+// Dynamic XML Sitemap Generator
+app.get('/sitemap.xml', (c) => {
+  const baseUrl = 'https://toolstaq.online';
+  
+  // Filter only the live tools to prevent Google from crawling "coming soon" dead ends
+  const liveTools = toolsDataRaw.tools.filter(tool => tool.status === 'live');
+  
+  const toolUrls = liveTools.map(tool => `
+    <url>
+      <loc>${baseUrl}${tool.path}</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+  `).join('');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>${baseUrl}/</loc>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+      </url>
+      ${toolUrls}
+    </urlset>`;
+
+  return c.text(xml.trim(), 200, {
+    'Content-Type': 'application/xml',
+    'Cache-Control': 'public, max-age=3600' // Cache at the edge for 1 hour
+  });
+});
 
 export { app }
 

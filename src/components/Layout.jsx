@@ -31,6 +31,23 @@ export const Layout = (props) => (
           } catch (e) {}
         })();
       `}} />
+
+      {/* 🧠 SEO Structured Data (JSON-LD) */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": props.title ? props.title.split(' | ')[0] : "ToolStaq",
+        "url": "https://toolstaq.online",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "description": props.description || "Privacy-first, zero-bloat developer and text tools running on the edge.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      })}} />
+      <script src="https://unpkg.com/lucide@latest"></script>
     </head>
     <body>
       <header>
@@ -94,6 +111,9 @@ export const Layout = (props) => (
       <script dangerouslySetInnerHTML={{
         __html: `
         document.addEventListener('DOMContentLoaded', () => {
+          if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+          }
           const themeBtn = document.getElementById('theme-toggle');
           
           themeBtn.addEventListener('click', () => {
