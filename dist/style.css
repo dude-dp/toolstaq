@@ -867,3 +867,94 @@ footer {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* ── 23. DARK THEME OVERRIDES (Deep Purple Aesthetic) ───────── */
+[data-theme="dark"] {
+  /* Core Surfaces */
+  --color-bg-primary: #301934;
+  --color-bg-secondary: #1f1021; 
+  --color-bg-console: #080705; /* Keep black for code consoles */
+
+  /* Typography */
+  --color-text-primary: #f3f4f6; /* Off-white */
+  --color-text-secondary: #d8b4e2; /* Soft lavender-gray */
+  
+  /* Borders - Lighter purple to separate elements */
+  --color-border-default: #4c2852;
+  --color-border-muted: #3e2043;
+}
+
+/* Specific component overrides for dark mode contrast */
+[data-theme="dark"] .tool-badge {
+  background-color: #1f1021;
+  color: #d8b4e2;
+}
+
+[data-theme="dark"] .filter-btn:not(.active) {
+  background-color: #1f1021;
+}
+
+[data-theme="dark"] .coming-soon-card {
+  opacity: 0.6;
+}
+
+/* ── 24. THEME TOGGLE BUTTON & MOBILE HEADER ────────────────── */
+.theme-btn {
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  box-shadow: 2px 2px 0px var(--color-border-default);
+  transition: transform 0.1s, box-shadow 0.1s;
+  flex-shrink: 0;
+}
+
+.theme-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.theme-btn:focus-visible {
+  outline: 2px solid var(--color-action-default);
+  outline-offset: 2px;
+}
+
+/* SVG Icon Swapping Logic */
+.icon-sun { display: none; width: 20px; height: 20px; }
+.icon-moon { display: block; width: 20px; height: 20px; }
+
+[data-theme="dark"] .icon-sun { display: block; color: var(--color-accent-warning); }
+[data-theme="dark"] .icon-moon { display: none; }
+
+/* ── MOBILE OPTIMIZATION: Responsive Header ─────────────────── */
+header {
+  flex-wrap: wrap; /* Allows header to wrap nicely on narrow screens */
+}
+
+@media (max-width: 640px) {
+  /* On compact viewports like a Pixel 9a, push the nav row to the bottom and make it scrollable */
+  .logo-link { flex: 1; }
+  .theme-btn { margin-left: auto; }
+  
+  .nav-links {
+    order: 3;
+    width: 100%;
+    margin-top: var(--space-8);
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: var(--space-4);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+  
+  .nav-links::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+}
+
