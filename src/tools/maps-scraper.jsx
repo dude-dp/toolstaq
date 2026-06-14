@@ -84,6 +84,14 @@ export const MapsScraperView = () => {
         const countVal = document.getElementById('maps-count-val');
         const copyBtn = document.getElementById('maps-copy-btn');
 
+        let extensionInstalled = false;
+
+        window.addEventListener('message', (e) => {
+          if (e.data && e.data.type === 'TOOLSTAQ_EXTENSION_INSTALLED') {
+            extensionInstalled = true;
+          }
+        });
+
         scrapeBtn.addEventListener('click', async () => {
           const query = queryInput.value.trim();
           if (!query) return;
@@ -96,26 +104,39 @@ export const MapsScraperView = () => {
           scrapeBtn.style.opacity = '0.7';
           outputEl.value = '';
 
-          try {
-            const response = await fetch('/api/scrape-maps?q=' + encodeURIComponent(query));
-            const data = await response.json();
-
-            if (!response.ok) {
-              throw new Error(data.error || 'Failed to scrape maps.');
-            }
-
-            // Success
-            countVal.textContent = data.total_found;
-            outputEl.value = JSON.stringify(data.results, null, 2);
-            resultsContainer.style.display = 'block';
-          } catch (e) {
+          if (!extensionInstalled && !window.TOOLSTAQ_EXTENSION_ACTIVE) {
             errorEl.style.display = 'block';
-            errorEl.textContent = 'Error: ' + e.message;
-          } finally {
+            errorEl.innerHTML = '<strong>Extension Required:</strong> To bypass Google\\'s anti-scraping blocks, you must install the ToolStaq Chrome Extension to run this tool directly from your browser context.';
             statusEl.style.display = 'none';
             scrapeBtn.disabled = false;
             scrapeBtn.style.opacity = '1';
+            return;
           }
+
+          // Define a one-time message listener for the response
+          const handleResponse = (e) => {
+            if (e.source !== window || !e.data || e.data.type !== 'TOOLSTAQ_SCRAPE_RES') return;
+            
+            window.removeEventListener('message', handleResponse);
+            
+            statusEl.style.display = 'none';
+            scrapeBtn.disabled = false;
+            scrapeBtn.style.opacity = '1';
+
+            if (!e.data.success) {
+              errorEl.style.display = 'block';
+              errorEl.textContent = 'Error: ' + (e.data.error || 'Failed to scrape maps.');
+            } else {
+              countVal.textContent = e.data.data.total_found;
+              outputEl.value = JSON.stringify(e.data.data.results, null, 2);
+              resultsContainer.style.display = 'block';
+            }
+          };
+
+          window.addEventListener('message', handleResponse);
+
+          // Send the request to the extension
+          window.postMessage({ type: 'TOOLSTAQ_SCRAPE_REQ', query: query }, '*');
         });
 
         // Trigger on Enter

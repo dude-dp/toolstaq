@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "ToolStaq Google Maps Scraper",
+  "version": "1.0",
+  "description": "Extracts Google Maps business data using heuristic fingerprints for ToolStaq.",
+  "permissions": [
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://www.google.com/maps/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://toolstaq.online/*", "http://localhost:*/*"],
+      "js": ["content_toolstaq.js"]
+    }
+  ]
+}
