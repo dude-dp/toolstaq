@@ -28,11 +28,53 @@ app.get('/', (c) => {
         <h1 class="hero-title">
           All your developer tools for
           <div class="ticker-wrapper">
+            <style dangerouslySetInnerHTML={{__html: `
+              .ticker-list {
+                animation: ticker-scroll ${categories.length * 2}s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+              }
+              @keyframes ticker-scroll {
+                ${categories.map((_, i) => {
+                  const step = 100 / categories.length;
+                  const pauseStart = i * step;
+                  const pauseEnd = pauseStart + (step * 0.75); // Hold on item for 75% of step
+                  return `
+                    ${pauseStart}%, ${pauseEnd}% {
+                      transform: translateY(-${i * 60}px);
+                    }
+                  `;
+                }).join('')}
+                100% {
+                  transform: translateY(-${categories.length * 60}px);
+                }
+              }
+              
+              @media (max-width: 640px) {
+                .ticker-list {
+                  animation: ticker-scroll-mobile ${categories.length * 2}s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+                }
+                @keyframes ticker-scroll-mobile {
+                  ${categories.map((_, i) => {
+                    const step = 100 / categories.length;
+                    const pauseStart = i * step;
+                    const pauseEnd = pauseStart + (step * 0.75);
+                    return `
+                      ${pauseStart}%, ${pauseEnd}% {
+                        transform: translateY(-${i * 44}px);
+                      }
+                    `;
+                  }).join('')}
+                  100% {
+                    transform: translateY(-${categories.length * 44}px);
+                  }
+                }
+              }
+            `}} />
             <ul class="ticker-list">
-              <li class="ticker-item">JSON Parsing</li>
-              <li class="ticker-item">Data Encryption</li>
-              <li class="ticker-item">Text Analytics</li>
-              <li class="ticker-item">JSON Parsing</li>
+              {categories.map((cat) => (
+                <li class="ticker-item">{cat.name}</li>
+              ))}
+              {/* Clone first item to create seamless loop */}
+              <li class="ticker-item">{categories[0].name}</li>
             </ul>
           </div>
         </h1>

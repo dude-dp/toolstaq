@@ -260,7 +260,6 @@ header {
   margin: 0;
   padding: 0;
   list-style: none;
-  animation: ticker-scroll 8s steps(4) infinite;
 }
 
 .ticker-item {
@@ -268,32 +267,7 @@ header {
   white-space: nowrap;
 }
 
-@keyframes ticker-scroll {
 
-  0%,
-  20% {
-    transform: translateY(0);
-  }
-
-  25%,
-  45% {
-    transform: translateY(-60px);
-  }
-
-  50%,
-  70% {
-    transform: translateY(-120px);
-  }
-
-  75%,
-  95% {
-    transform: translateY(-180px);
-  }
-
-  100% {
-    transform: translateY(-240px);
-  }
-}
 
 /* ── 6. CARDS (Categories & Tools) ──────────────────────────── */
 .categories-container,
@@ -560,30 +534,5 @@ select.search-input {
     height: 44px;
   }
 
-  @keyframes ticker-scroll {
 
-    0%,
-    20% {
-      transform: translateY(0);
-    }
-
-    25%,
-    45% {
-      transform: translateY(-44px);
-    }
-
-    50%,
-    70% {
-      transform: translateY(-88px);
-    }
-
-    75%,
-    95% {
-      transform: translateY(-132px);
-    }
-
-    100% {
-      transform: translateY(-176px);
-    }
-  }
 }
