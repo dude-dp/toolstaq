@@ -106,7 +106,17 @@ export const MapsScraperView = () => {
 
           if (!extensionInstalled && !window.TOOLSTAQ_EXTENSION_ACTIVE) {
             errorEl.style.display = 'block';
-            errorEl.innerHTML = '<strong>Extension Required:</strong> To bypass Google\\'s anti-scraping blocks, you must install the ToolStaq Chrome Extension to run this tool directly from your browser context.';
+            errorEl.innerHTML = '<div style="display: flex; flex-direction: column; gap: var(--space-12);">' +
+                '<div>' +
+                  '<strong>Extension Required:</strong> To bypass Google\\'s anti-scraping blocks and fetch local data directly from your browser, you must install the ToolStaq Chrome Extension.' +
+                '</div>' +
+                '<div style="display: flex; gap: var(--space-12); align-items: center; margin-top: 4px;">' +
+                  '<a href="/toolstaq-extension.zip" class="btn btn-primary" style="text-decoration: none;">Download Extension (.zip)</a>' +
+                  '<span style="font-size: 12px; color: var(--color-text-secondary);">' +
+                    '<em>Extract zip &gt; Chrome &gt; Manage Extensions &gt; Developer Mode &gt; Load Unpacked</em>' +
+                  '</span>' +
+                '</div>' +
+              '</div>';
             statusEl.style.display = 'none';
             scrapeBtn.disabled = false;
             scrapeBtn.style.opacity = '1';
