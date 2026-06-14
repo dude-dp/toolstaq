@@ -42,12 +42,12 @@ app.get('/', (c) => {
                 const pauseEnd = pauseStart + (step * 0.75); // Hold on item for 75% of step
                 return `
                     ${pauseStart}%, ${pauseEnd}% {
-                      transform: translateY(-${i * 60}px);
+                      transform: translateX(-${i * (100 / (categories.length + 1))}%);
                     }
                   `;
               }).join('')}
                 100% {
-                  transform: translateY(-${categories.length * 60}px);
+                  transform: translateX(-${categories.length * (100 / (categories.length + 1))}%);
                 }
               }
               
@@ -62,16 +62,24 @@ app.get('/', (c) => {
                 const pauseEnd = pauseStart + (step * 0.75);
                 return `
                       ${pauseStart}%, ${pauseEnd}% {
-                        transform: translateY(-${i * 44}px);
+                        transform: translateX(-${i * (100 / (categories.length + 1))}%);
                       }
                     `;
               }).join('')}
                   100% {
-                    transform: translateY(-${categories.length * 44}px);
+                    transform: translateX(-${categories.length * (100 / (categories.length + 1))}%);
                   }
                 }
               }
             `}} />
+            
+            {/* Hidden sizer to force the wrapper to be exactly as wide as the widest item */}
+            <div class="ticker-sizer" aria-hidden="true">
+              {categories.map((cat) => (
+                <div>{cat.name}</div>
+              ))}
+            </div>
+
             <ul class="ticker-list">
               {categories.map((cat) => (
                 <li class="ticker-item">{cat.name}</li>
