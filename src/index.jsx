@@ -36,11 +36,11 @@ app.get('/', (c) => {
             </ul>
           </div>
         </h1>
-        <p style="font-size: 18px; line-height: 1.6; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto; margin-bottom: var(--space-32);">
+        <p class="body-lead" style="max-width: 600px; margin: 0 auto; margin-bottom: var(--space-32);">
           Privacy-first, edge-rendered developer utilities. Zero hydration payload tracking, zero background processing lags.
         </p>
         <div style="display: flex; justify-content: center; gap: var(--space-16);">
-          <a href="#popular-tools" class="btn btn-primary" style="font-size: 18px; display: flex; align-items: center; gap: 8px;">
+          <a href="#popular-tools" class="btn btn-filled" style="display: flex; align-items: center; gap: var(--space-8);">
             <i data-lucide="compass" style="width: 20px; height: 20px;"></i>
             Explore All Tools
           </a>
@@ -56,7 +56,7 @@ app.get('/', (c) => {
           {/* Popular Tools Grid */}
           <section id="popular-tools">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-24);">
-              <h2 style="font-size: 24px; font-weight: 700; color: var(--color-text-primary);">Most Popular Tools</h2>
+              <h2>Most Popular Tools</h2>
             </div>
 
             <div class="tools-grid">
@@ -70,7 +70,7 @@ app.get('/', (c) => {
                     </span>
                     
                     {tool.searches && (
-                      <span style="font-size: 12px; font-weight: 500; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px;">
+                      <span style="font-size: var(--text-caption); font-weight: 500; color: var(--color-text-secondary); display: flex; align-items: center; gap: var(--space-4);">
                         {tool.searches}
                       </span>
                     )}
@@ -78,14 +78,14 @@ app.get('/', (c) => {
                   
                   <div style="flex-grow: 1;">
                     <h3 style="margin-bottom: var(--space-8);">{tool.name}</h3>
-                    <p style="font-size: 14px;">{tool.desc}</p>
+                    <p style="font-size: var(--text-xs);">{tool.desc}</p>
                   </div>
                   
                   <div style="margin-top: var(--space-24);">
                     {tool.status === 'live' ? (
-                      <a href={tool.path} class="btn btn-primary" style="width: 100%;">Open Tool</a>
+                      <a href={tool.path} class="btn btn-filled" style="width: 100%;">Open Tool</a>
                     ) : (
-                      <button onclick={`alert('The ${tool.name} integration pipeline is active.')`} class="btn" style="width: 100%;" disabled>
+                      <button onclick={`alert('The ${tool.name} integration pipeline is active.')`} class="btn btn-filled" style="width: 100%;" disabled>
                         In Development
                       </button>
                     )}
@@ -101,20 +101,20 @@ app.get('/', (c) => {
           </div>
 
           {/* SEO Rich Content Section */}
-          <article class="category-card" style="cursor: default; transition: none; transform: none; background-color: var(--color-bg-primary);">
-            <h2 style="font-size: 28px; font-weight: 800; margin-bottom: var(--space-16); color: var(--color-text-primary);">Why Use ToolStaq for Your Development Needs?</h2>
+          <article class="category-card" style="cursor: default; transition: none; transform: none; background-color: var(--color-bg);">
+            <h2 style="margin-bottom: var(--space-16);">Why Use ToolStaq for Your Development Needs?</h2>
 
             <div style="color: var(--color-text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: var(--space-16);">
               <p>
                 In the fast-paced world of web development and digital marketing, having the right utilities at your fingertips can save countless hours. <strong>ToolStaq</strong> provides a comprehensive suite of completely free, client-side web tools designed to streamline your daily workflow without the need to install heavy software.
               </p>
 
-              <h3 style="font-size: 20px; font-weight: 700; color: var(--color-text-primary); margin-top: var(--space-16);">100% Free & Secure Client-Side Processing</h3>
+              <h3 style="margin-top: var(--space-16);">100% Free & Secure Client-Side Processing</h3>
               <p>
                 We prioritize your privacy. The vast majority of our utilities, such as the <em>JSON Formatter</em>, <em>Regex Tester</em>, and <em>Text Encoders</em>, operate entirely within your browser. This means your sensitive data never leaves your device, ensuring maximum security and zero latency.
               </p>
 
-              <h3 style="font-size: 20px; font-weight: 700; color: var(--color-text-primary); margin-top: var(--space-16);">Essential Tools for Every Discipline</h3>
+              <h3 style="margin-top: var(--space-16);">Essential Tools for Every Discipline</h3>
               <ul style="padding-left: var(--space-24); list-style-type: disc; display: flex; flex-direction: column; gap: var(--space-8);">
                 <li><strong>For Developers:</strong> Validate JSON, minify CSS/JS/HTML files, generate UUIDs, and encode URLs safely.</li>
                 <li><strong>For Designers:</strong> Extract color palettes, convert image formats (WEBP to PNG), and compress assets for faster page loads.</li>
@@ -134,15 +134,15 @@ app.get('/', (c) => {
 
           {/* Categories Widget */}
           <div class="category-card" style="cursor: default; transition: none; transform: none; padding: var(--space-24);">
-            <h3 style="font-size: 18px; font-weight: 800; border-bottom: 2px solid var(--color-border-default); padding-bottom: var(--space-12); margin-bottom: var(--space-16); color: var(--color-text-primary);">Tool Categories</h3>
+            <h3 style="border-bottom: 2px solid var(--color-border); padding-bottom: var(--space-12); margin-bottom: var(--space-16);">Tool Categories</h3>
             <ul style="display: flex; flex-direction: column; gap: var(--space-12); list-style: none; padding: 0;">
               {categories.map((category) => {
                 const toolCount = toolsData.filter(t => t.cat === category.id).length;
                 return (
                   <li>
-                    <a href={`#popular-tools`} class="sidebar-category-link" style="display: flex; justify-content: space-between; align-items: center; color: var(--color-text-primary); text-decoration: none; font-weight: 600;">
+                    <a href={`#popular-tools`} class="sidebar-category-link" style="display: flex; justify-content: space-between; align-items: center; color: var(--color-text); text-decoration: none; font-weight: 600;">
                       <span class="hover-underline">{category.name}</span>
-                      <span style="background: var(--color-bg-primary); border: 2px solid var(--color-border-default); border-radius: 12px; padding: 2px 8px; font-size: 12px; font-weight: 700;">{toolCount}</span>
+                      <span style="background: var(--color-bg); border: 2px solid var(--color-border); border-radius: var(--radius-button-lg); padding: 2px 8px; font-size: var(--text-caption); font-weight: 700;">{toolCount}</span>
                     </a>
                   </li>
                 );
