@@ -10,6 +10,8 @@ import { TermsOfServiceView } from './pages/terms.jsx'
 import { ContactView } from './pages/contact.jsx'
 import { UuidGeneratorView } from './tools/uuid-generator.jsx'
 import { PasswordGeneratorView } from './tools/password-generator.jsx'
+import { CategoriesView } from './pages/categories.jsx'
+import { DocsView } from './pages/docs.jsx'
 
 import toolsDataRaw from './alltools.json' // Import the unified dataset
 
@@ -83,13 +85,11 @@ app.get('/', (c) => {
           Privacy-first, edge-rendered developer utilities. Zero hydration payload tracking, zero background processing lags.
         </p>
         <div class="hero-actions">
-          <a href="#popular-tools" class="btn btn-filled">
-            <i data-lucide="compass" class="btn-icon"></i>
-            Explore All Tools
+          <a href="/categories" class="btn btn-filled">
+            Tool Categories
           </a>
           <a href="/docs" class="btn btn-primary">
-            <i data-lucide="book" class="btn-icon"></i>
-            Explore the docs
+            Documentation
           </a>
         </div>
       </section>
@@ -243,6 +243,14 @@ app.get('/tools/uuid-generator', (c) => {
 
 app.get('/tools/password-generator', (c) => {
   return c.html(<PasswordGeneratorView />)
+})
+
+app.get('/categories', (c) => {
+  return c.html(<CategoriesView />)
+})
+
+app.get('/docs', (c) => {
+  return c.html(<DocsView />)
 })
 
 // Dynamic XML Sitemap Generator
