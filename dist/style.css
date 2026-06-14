@@ -252,13 +252,16 @@ header {
   vertical-align: bottom;
   position: relative;
   margin-left: 12px;
-  color: var(--color-text);
-  /* Muted monochrome instead of color */
+  background: linear-gradient(90deg, var(--color-text) 0%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Premium monochrome gradient instead of flat color */
 }
 
 .ticker-list {
   margin: 0;
-  padding: 0;
+  padding: 2px;
   list-style: none;
 }
 
@@ -461,6 +464,7 @@ select.search-input {
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
+
   .categories-container,
   .tools-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -468,12 +472,32 @@ select.search-input {
 }
 
 @media (max-width: 640px) {
+
   /* Reduce font sizes ~80% */
-  h1 { font-size: 56px; line-height: 56px; }
-  h2 { font-size: 28px; line-height: 32px; }
-  h3 { font-size: 16px; line-height: 24px; }
-  h4 { font-size: 14px; line-height: 24px; }
-  .body-lead { font-size: 20px; line-height: 32px; }
+  h1 {
+    font-size: 56px;
+    line-height: 56px;
+  }
+
+  h2 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  h3 {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  h4 {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .body-lead {
+    font-size: 20px;
+    line-height: 32px;
+  }
 
   header {
     padding: var(--space-16);
@@ -505,7 +529,7 @@ select.search-input {
   select.search-input {
     min-height: 44px;
   }
-  
+
   .btn,
   .nav-link,
   .sidebar-category-link {
