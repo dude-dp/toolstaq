@@ -3,23 +3,24 @@
 /* ── 1. CINEMATIC MONOCHROME TOKENS ─────────────────────────── */
 :root {
   /* Surfaces */
-  --color-bg-primary: #0a0a0a;
-  --color-bg-secondary: #141414;
-  --color-bg-console: #000000;
+  --color-bg: #0a0a0a;
+  --color-bg-secondary: #ffffff;
 
   /* Typography */
-  --color-text-primary: #ededed;
-  --color-text-secondary: #888888;
-  --color-text-muted: #525252;
+  --color-text: #ededed;
+  --color-text-secondary: #999999;
 
   /* Brand Accents */
-  --color-action-default: #888888;
-  --color-action-hover: #a3a3a3;
-  --color-action-active: #525252;
+  --color-primary: #888888;
+  --color-secondary: #aaaaaa;
 
   /* Borders */
-  --color-border-default: #262626;
-  --color-border-muted: #1f1f1f;
+  --color-border: #2a2a2a;
+
+  /* Full Palette */
+  --palette-1: #000000;
+  --palette-2: #ffffff;
+  --palette-3: #2a2a2a;
 
   /* Font Stacks */
   --font-heading: 'Geist', sans-serif;
@@ -59,8 +60,8 @@
 }
 
 body {
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-body);
   font-size: 15px; /* Slightly smaller, more refined running text */
   font-weight: 400;
@@ -75,7 +76,7 @@ h1, h2, h3, .logo-link {
   font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: -1.8px;
-  color: var(--color-text-primary);
+  color: var(--color-text);
 }
 
 h1 { font-size: 56px; line-height: 1.05; }
@@ -97,7 +98,7 @@ header {
   background-color: rgba(10, 10, 10, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-border-muted);
+  border-bottom: 1px solid var(--color-border);
   padding: var(--space-16) var(--space-32);
   display: flex;
   align-items: center;
@@ -113,8 +114,8 @@ header {
 }
 
 .logo-icon {
-  background-color: var(--color-text-primary);
-  color: var(--color-bg-primary);
+  background-color: var(--color-text);
+  color: var(--color-bg);
   width: 32px;
   height: 32px;
   border-radius: var(--radius-sm);
@@ -137,7 +138,7 @@ header {
   transition: color 0.2s ease;
 }
 
-.nav-link:hover { color: var(--color-text-primary); }
+.nav-link:hover { color: var(--color-text); }
 
 /* ── 5. HERO & TICKER ───────────────────────────────────────── */
 .hero-container {
@@ -154,7 +155,7 @@ header {
   vertical-align: bottom;
   position: relative;
   margin-left: 12px;
-  color: var(--color-text-primary); /* Muted monochrome instead of color */
+  color: var(--color-text); /* Muted monochrome instead of color */
 }
 
 .ticker-list {
@@ -181,7 +182,7 @@ header {
 
 .category-card, .tool-card {
   background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border-default);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md); /* 16px soft corners */
   padding: var(--space-24);
   box-shadow: var(--shadow-1);
@@ -190,28 +191,37 @@ header {
   flex-direction: column;
 }
 
+/* Adjust text on cards because secondary bg is white */
+.category-card *, .tool-card * {
+  color: var(--palette-1);
+}
+
+.category-card p, .tool-card p {
+  color: var(--color-text-secondary);
+}
+
 /* Smooth Elevation Hover Effect */
 .category-card:hover, .tool-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-4);
-  border-color: var(--color-action-default);
+  border-color: var(--color-primary);
 }
 
 .category-card.active {
-  background-color: var(--color-border-default);
-  border-color: var(--color-text-primary);
+  background-color: var(--color-border);
+  border-color: var(--color-text);
   box-shadow: var(--shadow-2);
 }
 
 .category-card.active h3, .category-card.active p {
-  color: var(--color-text-primary);
+  color: var(--color-text);
 }
 
 /* ── 7. UI ELEMENTS & BUTTONS ───────────────────────────────── */
 .btn {
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
-  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
   padding: var(--space-12) var(--space-24);
   border-radius: var(--radius-sm); /* 12px buttons */
   font-size: 14px;
@@ -226,27 +236,27 @@ header {
 
 .btn:hover:not(:disabled) {
   background-color: var(--color-bg-secondary);
-  border-color: var(--color-action-default);
+  border-color: var(--color-primary);
 }
 
 .btn-primary {
-  background-color: var(--color-action-default); /* #888888 */
-  color: var(--color-bg-primary); /* Dark text for contrast */
+  background-color: var(--color-primary); /* #888888 */
+  color: var(--palette-1); /* Dark text for contrast */
   border: 1px solid var(--color-text-secondary);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: var(--color-text-primary); /* Shifts to white on hover */
-  border-color: var(--color-text-primary);
+  background-color: var(--color-secondary); /* Shifts to #aaaaaa on hover */
+  border-color: var(--color-text);
 }
 
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Subtle Monochrome Badges */
 .tool-badge {
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
-  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
   font-size: 11px;
   font-weight: 600;
   padding: var(--space-4) var(--space-8);
@@ -256,26 +266,26 @@ header {
   box-shadow: var(--shadow-1);
 }
 
-.badge-live { color: var(--color-text-primary); }
-.badge-soon { color: var(--color-text-muted); border-color: var(--color-border-muted); }
+.badge-live { color: var(--color-text); }
+.badge-soon { color: var(--color-text-secondary); border-color: var(--color-border); }
 
 /* ── 8. FORMS & INPUTS ──────────────────────────────────────── */
 .text-area, select.search-input {
   width: 100%;
   background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border-default);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-16);
-  color: var(--color-text-primary);
+  color: var(--palette-1);
   font-family: var(--font-mono);
   font-size: 14px;
-  box-shadow: var(--shadow-inset);
+  box-shadow: var(--shadow-1);
   transition: border-color 0.2s ease;
 }
 
 .text-area:focus-visible {
   outline: none;
-  border-color: var(--color-action-default);
+  border-color: var(--color-primary);
 }
 
 /* ── 9. UTILITIES ───────────────────────────────────────────── */
