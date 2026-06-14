@@ -42,12 +42,12 @@ app.get('/', (c) => {
                 const pauseEnd = pauseStart + (step * 0.75); // Hold on item for 75% of step
                 return `
                     ${pauseStart}%, ${pauseEnd}% {
-                      transform: translateX(-${i * (100 / (categories.length + 1))}%);
+                      transform: translateX(-${i * 100}%);
                     }
                   `;
               }).join('')}
                 100% {
-                  transform: translateX(-${categories.length * (100 / (categories.length + 1))}%);
+                  transform: translateX(-${categories.length * 100}%);
                 }
               }
               
@@ -62,12 +62,12 @@ app.get('/', (c) => {
                 const pauseEnd = pauseStart + (step * 0.75);
                 return `
                       ${pauseStart}%, ${pauseEnd}% {
-                        transform: translateX(-${i * (100 / (categories.length + 1))}%);
+                        transform: translateX(-${i * 100}%);
                       }
                     `;
               }).join('')}
                   100% {
-                    transform: translateX(-${categories.length * (100 / (categories.length + 1))}%);
+                    transform: translateX(-${categories.length * 100}%);
                   }
                 }
               }
