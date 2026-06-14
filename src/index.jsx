@@ -8,6 +8,7 @@ import { Base64View } from './tools/base64.jsx'
 import { PrivacyPolicyView } from './pages/privacy.jsx'
 import { TermsOfServiceView } from './pages/terms.jsx'
 import { ContactView } from './pages/contact.jsx'
+import { MapsScraperView } from './tools/maps-scraper.jsx'
 import toolsDataRaw from './alltools.json' // Import the unified dataset
 
 const app = new Hono()
@@ -180,6 +181,10 @@ app.get('/tools/word-counter', (c) => {
 
 app.get('/tools/base64', (c) => {
   return c.html(<Base64View />)
+})
+
+app.get('/tools/maps-scraper', (c) => {
+  return c.html(<MapsScraperView />)
 })
 
 // === LEGAL PAGES ===
@@ -742,10 +747,10 @@ app.get('/tools/password-generator', (c) => {
 // Dynamic XML Sitemap Generator
 app.get('/sitemap.xml', (c) => {
   const baseUrl = 'https://toolstaq.online';
-  
+
   // Filter only the live tools to prevent Google from crawling "coming soon" dead ends
   const liveTools = toolsDataRaw.tools.filter(tool => tool.status === 'live');
-  
+
   const toolUrls = liveTools.map(tool => `
     <url>
       <loc>${baseUrl}${tool.path}</loc>
@@ -768,6 +773,120 @@ app.get('/sitemap.xml', (c) => {
     'Content-Type': 'application/xml',
     'Cache-Control': 'public, max-age=3600' // Cache at the edge for 1 hour
   });
+});
+
+// Google Maps Scraper API
+app.get('/api/scrape-maps', async (c) => {
+  const query = c.req.query('q');
+  if (!query) return c.json({ error: "Missing query parameter" }, 400);
+
+  try {
+    // 1. Fetch the raw HTML from Google Maps
+    const searchUrl = `https://www.google.com/maps/search/${encodeURIComponent(query)}?hl=en`;
+    const response = await fetch(searchUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept-Language': 'en-US,en;q=0.9'
+      }
+    });
+
+    const html = await response.text();
+
+    // 2. Extract the massive JSON blob using safe string splitting
+    // This avoids Regex memory limits on huge payloads
+    if (!html.includes('window.APP_INITIALIZATION_STATE=')) {
+        return c.json({ error: "Google blocked the request or changed page architecture." }, 500);
+    }
+    
+    const rawJsonString = html
+        .split('window.APP_INITIALIZATION_STATE=')[1]
+        .split(';window.APP_FLAGS=')[0];
+
+    // 3. Parse the JSON safely
+    const dataMatrix = JSON.parse(rawJsonString);
+
+    // 4. The Heuristic Hunter Function
+    function huntForBusinesses(node, results = new Map()) {
+      if (Array.isArray(node)) {
+        
+        // FINGERPRINT CHECK: Does this array contain a Google Maps Feature ID?
+        let isBusinessNode = false;
+        let placeId = null;
+
+        for (let item of node) {
+          if (typeof item === 'string' && item.startsWith('0x') && item.includes(':0x')) {
+            isBusinessNode = true;
+            placeId = item;
+            break;
+          }
+        }
+
+        // If it's a business node, extract data by TYPE, not by INDEX
+        if (isBusinessNode && node.length > 5 && !results.has(placeId)) {
+          let business = {
+            id: placeId,
+            name: "Unknown",
+            rating: null,
+            reviews: null,
+            website: null,
+            phone: null
+          };
+
+          node.forEach(item => {
+            if (typeof item === 'string') {
+              // Extract Website
+              if (item.startsWith('http') && !item.includes('google.com')) {
+                business.website = business.website || item;
+              } 
+              // Extract Phone (Basic Indian/International Regex)
+              else if (/^\+?\d{10,14}$/.test(item.replace(/[\s\-()]/g, '')) && item.length > 8) {
+                business.phone = business.phone || item;
+              } 
+              // Extract Name (The first decent length string that isn't the ID)
+              else if (item.length > 2 && item.length < 60 && item !== placeId && business.name === "Unknown") {
+                business.name = item;
+              }
+            } 
+            else if (typeof item === 'number') {
+              // Extract Rating (Float between 1.0 and 5.0)
+              if (item >= 1.0 && item <= 5.0 && !Number.isInteger(item)) {
+                business.rating = business.rating || item;
+              } 
+              // Extract Reviews Count (Large Integer)
+              else if (Number.isInteger(item) && item > 0 && item < 100000 && business.reviews === null) {
+                business.reviews = item;
+              }
+            }
+          });
+
+          // Only save if we actually found a name
+          if (business.name !== "Unknown") {
+            results.set(placeId, business);
+          }
+        }
+
+        // Recursively dig deeper into nested arrays
+        node.forEach(child => huntForBusinesses(child, results));
+      } 
+      else if (node && typeof node === 'object') {
+        Object.values(node).forEach(child => huntForBusinesses(child, results));
+      }
+      
+      return results;
+    }
+
+    // 5. Execute the Hunter against the massive JSON payload
+    const extractedMap = huntForBusinesses(dataMatrix);
+    const finalResults = Array.from(extractedMap.values());
+
+    return c.json({ 
+        total_found: finalResults.length,
+        results: finalResults 
+    });
+
+  } catch (error) {
+    return c.json({ error: error.message }, 500);
+  }
 });
 
 export { app }

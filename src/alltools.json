@@ -65,6 +65,7 @@
     { "id": "plagiarism", "name": "Plagiarism Checker", "desc": "Scan text against public indices to identify duplicate content.", "cat": "seo", "path": "#", "status": "coming-soon", "searches": "5M+/mo" },
     { "id": "sitemap-gen", "name": "XML Sitemap Generator", "desc": "Crawl endpoints to build structural sitemaps for search engines.", "cat": "seo", "path": "#", "status": "coming-soon", "searches": "400K/mo" },
     { "id": "kw-density", "name": "Keyword Density Checker", "desc": "Analyze content to prevent keyword stuffing and optimize ratios.", "cat": "seo", "path": "#", "status": "coming-soon", "searches": "350K/mo" },
-    { "id": "robots-txt", "name": "Robots.txt Generator", "desc": "Create compliant spider directives to manage web crawler access.", "cat": "seo", "path": "#", "status": "coming-soon", "searches": "220K/mo" }
+    { "id": "robots-txt", "name": "Robots.txt Generator", "desc": "Create compliant spider directives to manage web crawler access.", "cat": "seo", "path": "#", "status": "coming-soon", "searches": "220K/mo" },
+    { "id": "maps-scraper", "name": "Google Maps Scraper", "desc": "Scrape Google Maps business listings instantly via data fingerprint.", "cat": "seo", "path": "/tools/maps-scraper", "status": "live", "searches": "1M+/mo" }
   ]
 }
