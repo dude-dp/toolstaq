@@ -28,21 +28,22 @@ app.get('/', (c) => {
         <h1 class="hero-title">
           All your developer tools for
           <div class="ticker-wrapper">
-            <style dangerouslySetInnerHTML={{__html: `
+            <style dangerouslySetInnerHTML={{
+              __html: `
               .ticker-list {
                 animation: ticker-scroll ${categories.length * 2}s cubic-bezier(0.65, 0, 0.35, 1) infinite;
               }
               @keyframes ticker-scroll {
                 ${categories.map((_, i) => {
-                  const step = 100 / categories.length;
-                  const pauseStart = i * step;
-                  const pauseEnd = pauseStart + (step * 0.75); // Hold on item for 75% of step
-                  return `
+                const step = 100 / categories.length;
+                const pauseStart = i * step;
+                const pauseEnd = pauseStart + (step * 0.75); // Hold on item for 75% of step
+                return `
                     ${pauseStart}%, ${pauseEnd}% {
                       transform: translateY(-${i * 60}px);
                     }
                   `;
-                }).join('')}
+              }).join('')}
                 100% {
                   transform: translateY(-${categories.length * 60}px);
                 }
@@ -54,15 +55,15 @@ app.get('/', (c) => {
                 }
                 @keyframes ticker-scroll-mobile {
                   ${categories.map((_, i) => {
-                    const step = 100 / categories.length;
-                    const pauseStart = i * step;
-                    const pauseEnd = pauseStart + (step * 0.75);
-                    return `
+                const step = 100 / categories.length;
+                const pauseStart = i * step;
+                const pauseEnd = pauseStart + (step * 0.75);
+                return `
                       ${pauseStart}%, ${pauseEnd}% {
                         transform: translateY(-${i * 44}px);
                       }
                     `;
-                  }).join('')}
+              }).join('')}
                   100% {
                     transform: translateY(-${categories.length * 44}px);
                   }
@@ -78,7 +79,7 @@ app.get('/', (c) => {
             </ul>
           </div>
         </h1>
-        <p class="body-lead" style="max-width: 600px; margin: 0 auto; margin-bottom: var(--space-32);">
+        <p class="body-lead" style="max-width: 80%; margin: 0 auto; margin-top: var(--space-12); margin-bottom: var(--space-32);">
           Privacy-first, edge-rendered developer utilities. Zero hydration payload tracking, zero background processing lags.
         </p>
         <div style="display: flex; justify-content: center; gap: var(--space-16);">
@@ -104,25 +105,25 @@ app.get('/', (c) => {
             <div class="tools-grid">
               {toolsData.map((tool) => (
                 <div class={`tool-card tool-item-card data-cat-${tool.cat}`} data-status={tool.status}>
-                  
+
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-16);">
                     {/* Replaced hardcoded inline colors with semantic monochrome classes */}
                     <span class={`tool-badge ${tool.status === 'live' ? 'badge-live' : 'badge-soon'}`}>
                       {tool.status === 'live' ? 'LIVE' : 'PIPELINE'}
                     </span>
-                    
+
                     {tool.searches && (
                       <span style="font-size: var(--text-caption); font-weight: 500; color: var(--color-text-secondary); display: flex; align-items: center; gap: var(--space-4);">
                         {tool.searches}
                       </span>
                     )}
                   </div>
-                  
+
                   <div style="flex-grow: 1;">
                     <h3 style="margin-bottom: var(--space-8);">{tool.name}</h3>
                     <p style="font-size: var(--text-xs);">{tool.desc}</p>
                   </div>
-                  
+
                   <div style="margin-top: var(--space-24);">
                     {tool.status === 'live' ? (
                       <a href={tool.path} class="btn btn-filled" style="width: 100%;">Open Tool</a>
