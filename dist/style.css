@@ -95,6 +95,16 @@
   padding: 0;
 }
 
+::selection {
+  background-color: var(--color-secondary);
+  color: var(--color-bg);
+}
+
+::-moz-selection {
+  background-color: var(--color-secondary);
+  color: var(--color-bg);
+}
+
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
