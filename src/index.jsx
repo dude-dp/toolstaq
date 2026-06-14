@@ -8,7 +8,7 @@ import { Base64View } from './tools/base64.jsx'
 import { PrivacyPolicyView } from './pages/privacy.jsx'
 import { TermsOfServiceView } from './pages/terms.jsx'
 import { ContactView } from './pages/contact.jsx'
-import { MapsScraperView } from './tools/maps-scraper.jsx'
+
 import toolsDataRaw from './alltools.json' // Import the unified dataset
 
 const app = new Hono()
@@ -183,9 +183,6 @@ app.get('/tools/base64', (c) => {
   return c.html(<Base64View />)
 })
 
-app.get('/tools/maps-scraper', (c) => {
-  return c.html(<MapsScraperView />)
-})
 
 // === LEGAL PAGES ===
 app.get('/privacy', (c) => {
