@@ -263,7 +263,7 @@ header {
   vertical-align: bottom;
   position: relative;
   margin-left: 12px;
-  text-align: left;
+  text-align: center;
 }
 
 .ticker-sizer {
@@ -277,6 +277,7 @@ header {
   height: 60px;
   line-height: 60px;
   white-space: nowrap;
+  font-weight: 700;
 }
 
 .ticker-list {
@@ -286,6 +287,8 @@ header {
   margin: 0;
   padding: 0;
   list-style: none;
+  width: 100%;
+  min-width: 0;
 }
 
 .ticker-item {
