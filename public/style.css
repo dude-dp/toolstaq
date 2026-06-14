@@ -1,46 +1,32 @@
-/* ============================================================
-   ToolStaq Neumorphic Design System — style.css
-   Source of truth: reference docs/design_system.md
-   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
+/* ── 1. CINEMATIC MONOCHROME TOKENS ─────────────────────────── */
 :root {
-  /* --- Surfaces --- */
-  --color-bg-primary: #e8edf2;
-  --color-bg-secondary: #dde3ea;
-  --color-bg-console: #1a1e2e;
+  /* Surfaces */
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #141414;
+  --color-bg-console: #000000;
 
-  /* --- Neumorphic Shadow System --- */
-  --shadow-neu-raised: 6px 6px 14px #c5cad0, -6px -6px 14px #ffffff;
-  --shadow-neu-raised-lg: 10px 10px 24px #bfc5cc, -10px -10px 24px #ffffff;
-  --shadow-neu-inset: inset 4px 4px 8px #c5cad0, inset -4px -4px 8px #ffffff;
-  --shadow-neu-inset-sm: inset 2px 2px 5px #c5cad0, inset -2px -2px 5px #ffffff;
-  --shadow-neu-flat: 2px 2px 5px #c5cad0, -2px -2px 5px #ffffff;
+  /* Typography */
+  --color-text-primary: #ededed;
+  --color-text-secondary: #888888;
+  --color-text-muted: #525252;
 
-  /* --- Typography --- */
-  --color-text-primary: #3d4a5c;
-  --color-text-secondary: #6b7a90;
-  --color-text-muted: #9aa5b4;
-  --color-text-on-dark: #e8edf2;
+  /* Brand Accents */
+  --color-action-default: #888888;
+  --color-action-hover: #a3a3a3;
+  --color-action-active: #525252;
 
-  /* --- Accents --- */
-  --color-accent-focus: #e3170a;
-  --color-accent-focus-soft: rgba(227, 23, 10, 0.12);
-  --color-accent-warning: #f59e0b;
-  --color-accent-success: #10b981;
-  --color-accent-info: #6366f1;
+  /* Borders */
+  --color-border-default: #262626;
+  --color-border-muted: #1f1f1f;
 
-  /* --- Borders --- */
-  --color-border-default: rgba(255, 255, 255, 0.8);
-  --color-border-muted: rgba(197, 202, 208, 0.5);
-  --color-border-accent: rgba(227, 23, 10, 0.3);
+  /* Font Stacks */
+  --font-heading: 'Geist', sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
 
-  /* --- Font Stacks --- */
-  --font-sans: 'Nunito', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'ui-monospace', 'SFMono-Regular', monospace;
-
-  /* --- Spacing --- */
+  /* Spacing */
   --space-4: 4px;
   --space-8: 8px;
   --space-12: 12px;
@@ -50,36 +36,22 @@
   --space-48: 48px;
   --space-64: 64px;
 
-  /* --- Radii --- */
-  --radius-sm: 10px;
+  /* Friendly Radii (12px+) */
+  --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  --radius-xl: 32px;
   --radius-full: 9999px;
-  --radius-none: 0px;
+
+  /* 5-Level Tinted Cinematic Shadows */
+  /* Combines a soft drop shadow with a crisp 1px white inner-top edge */
+  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-4: 0 16px 32px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --shadow-5: 0 32px 64px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-[data-theme="dark"] {
-  --color-bg-primary: #1e2433;
-  --color-bg-secondary: #252b3b;
-  --color-bg-console: #0d1117;
-
-  --shadow-neu-raised: 6px 6px 14px #141824, -6px -6px 14px #283044;
-  --shadow-neu-raised-lg: 10px 10px 24px #111622, -10px -10px 24px #2b3550;
-  --shadow-neu-inset: inset 4px 4px 8px #141824, inset -4px -4px 8px #283044;
-  --shadow-neu-inset-sm: inset 2px 2px 5px #141824, inset -2px -2px 5px #283044;
-  --shadow-neu-flat: 2px 2px 5px #141824, -2px -2px 5px #283044;
-
-  --color-text-primary: #d0d8e8;
-  --color-text-secondary: #8899b4;
-  --color-text-muted: #5a6a80;
-  --color-text-on-dark: #d0d8e8;
-
-  --color-border-default: rgba(40, 48, 68, 0.8);
-  --color-border-muted: rgba(20, 24, 36, 0.6);
-}
-
-/* ── 2. RESET ───────────────────────────────────────────────── */
+/* ── 2. BASE RESET ──────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -89,142 +61,90 @@
 body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 15px; /* Slightly smaller, more refined running text */
+  font-weight: 400;
   line-height: 1.6;
   min-height: 100vh;
-  overflow-x: hidden;
-  padding-bottom: var(--space-64);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── 3. TYPOGRAPHY ──────────────────────────────────────────── */
-h1 {
-  font-size: 48px;
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--color-text-primary);
-}
-
-h2 {
-  font-size: 32px;
+/* ── 3. TYPOGRAPHY (Geist Bold & Tight) ─────────────────────── */
+h1, h2, h3, .logo-link {
+  font-family: var(--font-heading);
   font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  letter-spacing: -1.8px;
   color: var(--color-text-primary);
 }
 
-h3 {
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--color-text-primary);
-}
+h1 { font-size: 56px; line-height: 1.05; }
+h2 { font-size: 36px; line-height: 1.1; }
+h3 { font-size: 24px; line-height: 1.2; letter-spacing: -1.2px; } /* Slightly relaxed for legibility */
+p { color: var(--color-text-secondary); }
 
-p {
-  color: var(--color-text-secondary);
-}
-
-/* ── 4. LAYOUT ──────────────────────────────────────────────── */
+/* ── 4. LAYOUT & HEADER ─────────────────────────────────────── */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-32) var(--space-24);
+  padding: 0 var(--space-24);
 }
 
-/* ── 5. HEADER & NAV ────────────────────────────────────────── */
 header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--color-bg-primary);
+  background-color: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-muted);
   padding: var(--space-16) var(--space-32);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: var(--space-16);
-  border-bottom: 1px solid var(--color-border-muted);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  justify-content: space-between;
 }
 
 .logo-link {
   display: flex;
   align-items: center;
-  gap: var(--space-12);
+  gap: var(--space-8);
   text-decoration: none;
-  font-weight: 800;
   font-size: 22px;
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-}
-
-.logo-link:focus-visible {
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 3px;
-  border-radius: var(--radius-sm);
 }
 
 .logo-icon {
-  background-color: var(--color-bg-primary);
-  color: var(--color-accent-focus);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
-  font-size: 18px;
-  border: 1px solid var(--color-border-default);
-  box-shadow: var(--shadow-neu-raised);
+  font-size: 16px;
 }
 
 .nav-links {
   display: flex;
-  gap: var(--space-16);
-  list-style: none;
+  gap: var(--space-24);
 }
 
 .nav-link {
   color: var(--color-text-secondary);
   text-decoration: none;
   font-size: 14px;
-  font-weight: 700;
-  padding: var(--space-8) var(--space-16);
-  border-radius: var(--radius-full);
-  border: 1px solid transparent;
-  transition: all var(--transition-fast);
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
-.nav-link:hover {
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
-  box-shadow: var(--shadow-neu-raised);
-  border-color: var(--color-border-default);
-}
+.nav-link:hover { color: var(--color-text-primary); }
 
-.nav-link:focus-visible {
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 2px;
-}
-
-/* ── 6. HERO SECTION ────────────────────────────────────────── */
+/* ── 5. HERO & TICKER ───────────────────────────────────────── */
 .hero-container {
-  padding: 80px 24px 60px;
+  padding: 120px 24px 80px;
   text-align: center;
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
-}
-
-.hero-title {
-  font-size: 52px;
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-24);
-  color: var(--color-text-primary);
 }
 
 .ticker-wrapper {
@@ -234,21 +154,15 @@ header {
   vertical-align: bottom;
   position: relative;
   margin-left: 12px;
+  color: var(--color-text-primary); /* Muted monochrome instead of color */
 }
 
 .ticker-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  margin: 0; padding: 0; list-style: none;
   animation: ticker-scroll 8s steps(4) infinite;
 }
 
-.ticker-item {
-  height: 60px;
-  font-weight: 800;
-  color: var(--color-accent-focus);
-  white-space: nowrap;
-}
+.ticker-item { height: 60px; white-space: nowrap; }
 
 @keyframes ticker-scroll {
   0%, 20% { transform: translateY(0); }
@@ -258,584 +172,128 @@ header {
   100% { transform: translateY(-240px); }
 }
 
-/* ── 7. NEUMORPHIC BUTTONS ──────────────────────────────────── */
+/* ── 6. CARDS (Categories & Tools) ──────────────────────────── */
+.categories-container, .tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-24);
+}
+
+.category-card, .tool-card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md); /* 16px soft corners */
+  padding: var(--space-24);
+  box-shadow: var(--shadow-1);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Smooth Elevation Hover Effect */
+.category-card:hover, .tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-4);
+  border-color: var(--color-action-default);
+}
+
+.category-card.active {
+  background-color: var(--color-border-default);
+  border-color: var(--color-text-primary);
+  box-shadow: var(--shadow-2);
+}
+
+.category-card.active h3, .category-card.active p {
+  color: var(--color-text-primary);
+}
+
+/* ── 7. UI ELEMENTS & BUTTONS ───────────────────────────────── */
 .btn {
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border-default);
   color: var(--color-text-primary);
   padding: var(--space-12) var(--space-24);
-  border-radius: var(--radius-full);
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 700;
+  border-radius: var(--radius-sm); /* 12px buttons */
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-8);
-  box-shadow: var(--shadow-neu-flat);
-  transition: all var(--transition-fast);
-  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-1);
 }
 
 .btn:hover:not(:disabled) {
-  box-shadow: var(--shadow-neu-raised);
-  transform: translateY(-1px);
-}
-
-.btn:active:not(:disabled) {
-  box-shadow: var(--shadow-neu-inset-sm);
-  transform: translateY(0);
-}
-
-.btn:focus-visible {
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 3px;
-}
-
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  box-shadow: none;
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-action-default);
 }
 
 .btn-primary {
-  background-color: var(--color-accent-focus);
-  color: var(--color-text-on-dark);
-  border: none;
-  box-shadow: 4px 4px 10px rgba(227, 23, 10, 0.25), -2px -2px 8px rgba(255, 255, 255, 0.2);
+  background-color: var(--color-action-default); /* #888888 */
+  color: var(--color-bg-primary); /* Dark text for contrast */
+  border: 1px solid var(--color-text-secondary);
 }
 
 .btn-primary:hover:not(:disabled) {
-  box-shadow: 6px 6px 14px rgba(227, 23, 10, 0.35), -2px -2px 8px rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  background-color: var(--color-text-primary); /* Shifts to white on hover */
+  border-color: var(--color-text-primary);
 }
 
-.btn-primary:active:not(:disabled) {
-  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.3);
-  transform: translateY(0);
-}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-8);
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: var(--space-24);
-  padding: var(--space-8) var(--space-16);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-full);
-  background-color: var(--color-bg-primary);
-  box-shadow: var(--shadow-neu-flat);
-  transition: all var(--transition-fast);
-}
-
-.back-btn:hover {
-  color: var(--color-text-primary);
-  box-shadow: var(--shadow-neu-raised);
-  transform: translateY(-1px);
-}
-
-.back-btn:active {
-  box-shadow: var(--shadow-neu-inset-sm);
-  transform: translateY(0);
-}
-
-.back-btn:focus-visible {
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 2px;
-}
-
-/* ── 8. NEUMORPHIC CARDS & PANELS ────────────────────────────── */
-.tool-card, .category-card, .sidebar-card, .workspace-panel {
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
-  padding: var(--space-24);
-  box-shadow: var(--shadow-neu-raised);
-  transition: all var(--transition-base);
-}
-
-.tool-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 220px;
-}
-
-.tool-card:hover {
-  box-shadow: var(--shadow-neu-raised-lg);
-  transform: translateY(-3px);
-}
-
-.workspace-panel {
-  padding: var(--space-32);
-}
-
-.sidebar-card {
-  box-shadow: var(--shadow-neu-raised);
-}
-
-.sidebar-card h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: var(--space-8);
-}
-
-.sidebar-card p {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* ── 9. FORM ELEMENTS (Recessed/Inset) ───────────────────────── */
-.form-group {
-  margin-bottom: var(--space-24);
-}
-
-.form-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: var(--space-8);
-  color: var(--color-text-primary);
-}
-
-.text-area,
-select.search-input,
-input.search-input {
-  width: 100%;
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-muted);
-  border-radius: var(--radius-md);
-  padding: var(--space-12) var(--space-16);
-  color: var(--color-text-primary);
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 500;
-  box-shadow: var(--shadow-neu-inset);
-  outline: none;
-  transition: all var(--transition-fast);
-}
-
-.text-area {
-  height: 280px;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.6;
-  resize: vertical;
-}
-
-.text-area:focus-visible,
-select.search-input:focus-visible,
-input.search-input:focus-visible {
-  border-color: var(--color-border-accent);
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 2px;
-}
-
-.text-area.input-error {
-  border-color: var(--color-accent-focus);
-  box-shadow: var(--shadow-neu-inset), 0 0 0 3px var(--color-accent-focus-soft);
-}
-
-/* Custom styling for standard select arrow */
-select.search-input {
-  appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b7a90' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
-  background-repeat: no-repeat;
-  background-position: right var(--space-16) center;
-  background-size: 16px;
-  padding-right: var(--space-48);
-}
-
-/* ── 10. RESULT & CONSOLE OUTPUT ────────────────────────────── */
-.result-panel {
-  margin-top: var(--space-24);
-}
-
-.result-title {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-8);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-pre.result-box,
-.result-box {
-  background-color: var(--color-bg-console);
-  color: var(--color-text-on-dark);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1.6;
-  padding: var(--space-24);
-  border-radius: var(--radius-md);
-  overflow-x: auto;
-  white-space: pre-wrap;
-  word-break: break-all;
-  max-height: 500px;
-  overflow-y: auto;
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-#output-placeholder {
-  background-color: var(--color-bg-primary);
-  border: 1px dashed var(--color-border-muted);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-muted);
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: var(--shadow-neu-inset);
-}
-
-#error-box {
-  background-color: rgba(227, 23, 10, 0.05);
-  border: 1px solid rgba(227, 23, 10, 0.2);
-  border-radius: var(--radius-md);
-  color: var(--color-accent-focus);
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.5;
-  padding: var(--space-12) var(--space-16);
-  margin-bottom: var(--space-16);
-  box-shadow: var(--shadow-neu-inset);
-}
-
-/* ── 11. WORKSPACE SPECIFIC LAYOUTS ─────────────────────────── */
-.tool-view-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-32);
-  margin-top: var(--space-24);
-}
-
-@media (min-width: 768px) {
-  .tool-view-layout {
-    grid-template-columns: 3fr 1fr;
-  }
-}
-
-/* ── 12. TOOLS GRID & ITEMS ─────────────────────────────────── */
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-24);
-}
-
-.tool-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-16);
-}
-
+/* Subtle Monochrome Badges */
 .tool-badge {
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border-default);
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   font-size: 11px;
-  font-weight: 700;
-  padding: var(--space-4) var(--space-12);
+  font-weight: 600;
+  padding: var(--space-4) var(--space-8);
   border-radius: var(--radius-full);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  box-shadow: var(--shadow-neu-flat);
+  box-shadow: var(--shadow-1);
 }
 
-.tool-name {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: var(--space-8);
-  color: var(--color-text-primary);
-}
+.badge-live { color: var(--color-text-primary); }
+.badge-soon { color: var(--color-text-muted); border-color: var(--color-border-muted); }
 
-.tool-desc {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-}
-
-.tool-footer {
-  margin-top: var(--space-16);
-  padding-top: var(--space-16);
-  border-top: 1px solid var(--color-border-muted);
-}
-
-/* ── 13. STATS GRID & VALUES (Word Counter) ─────────────────── */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-16);
-  margin-bottom: var(--space-24);
-}
-
-@media (min-width: 480px) {
-  .stats-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.stat-box {
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  padding: var(--space-16);
-  text-align: center;
-  box-shadow: var(--shadow-neu-flat);
-}
-
-.stat-value {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--color-accent-focus);
-  line-height: 1.2;
-}
-
-.stat-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--color-text-secondary);
-  margin-top: var(--space-4);
-}
-
-/* ── 14. RANGE SLIDER (Password Generator) ──────────────────── */
-.range-slider {
+/* ── 8. FORMS & INPUTS ──────────────────────────────────────── */
+.text-area, select.search-input {
   width: 100%;
-  height: 8px;
   background-color: var(--color-bg-secondary);
-  border-radius: var(--radius-full);
-  -webkit-appearance: none;
-  appearance: none;
-  margin: var(--space-16) 0;
-  cursor: pointer;
-  box-shadow: var(--shadow-neu-inset-sm);
-}
-
-.range-slider:focus-visible {
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 3px;
-}
-
-.range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border-default);
-  cursor: pointer;
-  box-shadow: var(--shadow-neu-flat);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.range-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: var(--shadow-neu-raised);
-}
-
-/* ── 15. CHECKBOXES (Password Generator) ────────────────────── */
-.checkbox-group {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-12);
-  margin-top: var(--space-16);
-}
-
-@media (min-width: 480px) {
-  .checkbox-group {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: var(--space-12);
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  user-select: none;
-}
-
-.checkbox-input {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-muted);
-  border-radius: 6px;
-  box-shadow: var(--shadow-neu-inset-sm);
-  display: grid;
-  place-content: center;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.checkbox-input::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  transform: scale(0);
-  background-color: var(--color-accent-focus);
-  transition: transform var(--transition-fast);
-}
-
-.checkbox-input:checked::before {
-  transform: scale(1);
-}
-
-.checkbox-input:focus-visible {
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 2px;
-}
-
-/* ── 16. THEME TOGGLE BUTTON ────────────────────────────────── */
-.theme-btn {
-  background: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--color-text-primary);
-  box-shadow: var(--shadow-neu-flat);
-  transition: all var(--transition-fast);
-  flex-shrink: 0;
-}
-
-.theme-btn:hover {
-  box-shadow: var(--shadow-neu-raised);
-}
-
-.theme-btn:active {
-  box-shadow: var(--shadow-neu-inset-sm);
-}
-
-.theme-btn:focus-visible {
-  outline: 2px solid var(--color-accent-focus);
-  outline-offset: 2px;
-}
-
-.icon-sun { display: none; width: 22px; height: 22px; }
-.icon-moon { display: block; width: 22px; height: 22px; }
-
-[data-theme="dark"] .icon-sun { display: block; color: var(--color-accent-warning); }
-[data-theme="dark"] .icon-moon { display: none; }
-
-/* ── 17. AD CONTAINERS & PLACEHOLDERS ───────────────────────── */
-.ad-container, .ad-placeholder {
-  background-color: var(--color-bg-primary);
-  border: 1px dashed var(--color-border-muted);
-  border-radius: var(--radius-md);
-  color: var(--color-text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  box-shadow: var(--shadow-neu-inset-sm);
-}
-
-.ad-leaderboard {
-  height: 90px;
-  width: 100%;
-}
-
-.ad-sidebar-square {
-  height: 250px;
-  width: 100%;
-  margin-bottom: var(--space-24);
-}
-
-.ad-placeholder {
-  padding: var(--space-24);
-  width: 100%;
-}
-
-/* ── 18. SIDEBAR CATEGORIES & ACCENT TICKER ──────────────────── */
-.sidebar-category-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--color-text-primary);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
-  padding: var(--space-8) var(--space-12);
   border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
+  padding: var(--space-16);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  box-shadow: var(--shadow-inset);
+  transition: border-color 0.2s ease;
 }
 
-.sidebar-category-link:hover {
-  background-color: var(--color-bg-primary);
-  box-shadow: var(--shadow-neu-inset-sm);
+.text-area:focus-visible {
+  outline: none;
+  border-color: var(--color-action-default);
 }
 
-.sidebar-category-link span[style*="background"] {
-  background: var(--color-bg-primary) !important;
-  border: 1px solid var(--color-border-default) !important;
-  box-shadow: var(--shadow-neu-flat);
-  border-radius: 12px;
-  padding: 2px 8px;
-  font-size: 12px;
-  font-weight: 700;
-}
+/* ── 9. UTILITIES ───────────────────────────────────────────── */
+.tool-item-card { display: none; }
+.tool-item-card.visible { display: flex; }
 
-/* ── 19. RESPONSIVE OPTIMIZATIONS ───────────────────────────── */
 @media (max-width: 640px) {
-  header {
-    flex-wrap: wrap;
-    padding: var(--space-12) var(--space-16);
+  header { padding: var(--space-16); flex-wrap: wrap; }
+  .nav-links { order: 3; width: 100%; margin-top: var(--space-12); overflow-x: auto; }
+  .hero-container { padding: 80px 16px 40px; }
+  .hero-title { font-size: 40px; }
+  .ticker-wrapper { height: 44px; display: block; margin-left: 0; margin-top: 8px; }
+  .ticker-item { height: 44px; }
+  @keyframes ticker-scroll {
+    0%, 20% { transform: translateY(0); }
+    25%, 45% { transform: translateY(-44px); }
+    50%, 70% { transform: translateY(-88px); }
+    75%, 95% { transform: translateY(-132px); }
+    100% { transform: translateY(-176px); }
   }
-  
-  .logo-link { flex: 1; }
-  .theme-btn { margin-left: auto; }
-  
-  .nav-links {
-    order: 3;
-    width: 100%;
-    margin-top: var(--space-8);
-    overflow-x: auto;
-    white-space: nowrap;
-    padding-bottom: var(--space-4);
-    scrollbar-width: none;
-  }
-  
-  .nav-links::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .hero-title {
-    font-size: 36px;
-  }
-}
-
-/* Visually Hidden Helper */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }

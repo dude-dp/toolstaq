@@ -60,44 +60,37 @@ app.get('/', (c) => {
             </div>
 
             <div class="tools-grid">
-              {toolsData.slice(0, 6).map((tool, index) => (
-                <>
-                  {/* The Tool Card */}
-                  <div class={`tool-card tool-item-card data-cat-${tool.cat}`} data-status={tool.status} style="display: flex;">
-                    <div class="tool-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-16);">
-                      <span class={`tool-badge ${tool.status === 'coming-soon' ? 'coming-soon' : ''}`} style={tool.status === 'live' ? "display: flex; align-items: center; gap: 4px; color:#10b981;border-color:rgba(16,185,129,0.2);" : "display: flex; align-items: center; gap: 4px; color:#94a3b8;"}>
-                        {tool.status === 'live' ? <i data-lucide="zap" style="width: 14px; height: 14px;"></i> : <i data-lucide="clock" style="width: 14px; height: 14px;"></i>}
-                        {tool.status === 'live' ? 'EDGE LIVE' : 'PIPELINE'}
+              {toolsData.map((tool) => (
+                <div class={`tool-card tool-item-card data-cat-${tool.cat}`} data-status={tool.status}>
+                  
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-16);">
+                    {/* Replaced hardcoded inline colors with semantic monochrome classes */}
+                    <span class={`tool-badge ${tool.status === 'live' ? 'badge-live' : 'badge-soon'}`}>
+                      {tool.status === 'live' ? 'LIVE' : 'PIPELINE'}
+                    </span>
+                    
+                    {tool.searches && (
+                      <span style="font-size: 12px; font-weight: 500; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px;">
+                        {tool.searches}
                       </span>
-                    </div>
-
-                    <div style="flex-grow: 1;">
-                      <h3 class="tool-name" style="margin-top: 0;">{tool.name}</h3>
-                      <p class="tool-desc" style="line-height: 1.6;">{tool.desc}</p>
-                    </div>
-
-                    <div class="tool-footer" style="margin-top: var(--space-24); border-top: none;">
-                      {tool.status === 'live' ? (
-                        <a href={tool.path} class="btn btn-primary" style="width: 100%; justify-content: center; display: flex; align-items: center; gap: 8px;">
-                          <i data-lucide="play" style="width: 18px; height: 18px;"></i>
-                          Launch Workspace
-                        </a>
-                      ) : (
-                        <button onclick={`alert('The ${tool.name} integration pipeline is active and scheduled for edge deployment.')`} class="btn" style="width: 100%; justify-content: center; display: flex; align-items: center; gap: 8px; opacity: 0.5; cursor: not-allowed;">
-                          <i data-lucide="hammer" style="width: 18px; height: 18px;"></i>
-                          In Development
-                        </button>
-                      )}
-                    </div>
+                    )}
                   </div>
-
-                  {/* IN-FEED AD INJECTION: Inserts an ad every 6 tools */}
-                  {(index + 1) % 6 === 0 && (
-                    <div class={`ad-container ad-in-feed tool-item-card data-cat-${tool.cat}`}>
-                      Native In-Feed Ad Space
-                    </div>
-                  )}
-                </>
+                  
+                  <div style="flex-grow: 1;">
+                    <h3 style="margin-bottom: var(--space-8);">{tool.name}</h3>
+                    <p style="font-size: 14px;">{tool.desc}</p>
+                  </div>
+                  
+                  <div style="margin-top: var(--space-24);">
+                    {tool.status === 'live' ? (
+                      <a href={tool.path} class="btn btn-primary" style="width: 100%;">Open Tool</a>
+                    ) : (
+                      <button onclick={`alert('The ${tool.name} integration pipeline is active.')`} class="btn" style="width: 100%;" disabled>
+                        In Development
+                      </button>
+                    )}
+                  </div>
+                </div>
               ))}
             </div>
           </section>
