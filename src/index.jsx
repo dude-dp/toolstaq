@@ -24,7 +24,7 @@ app.get('/', (c) => {
     <Layout title="ToolStaq | Instant Developer Tools Hub">
 
       {/* 1. HERO - Massive vertical padding */}
-      <section class="hero-container" style="padding-top: var(--space-32); padding-bottom: var(--space-48);">
+      <section class="hero-container">
         <h1 class="hero-title">
           All your developer tools for
           <div class="ticker-wrapper">
@@ -79,26 +79,30 @@ app.get('/', (c) => {
             </ul>
           </div>
         </h1>
-        <p class="body-lead" style="max-width: 80%; margin: 0 auto; margin-top: var(--space-12); margin-bottom: var(--space-32);">
+        <p class="body-lead hero-lead">
           Privacy-first, edge-rendered developer utilities. Zero hydration payload tracking, zero background processing lags.
         </p>
-        <div style="display: flex; justify-content: center; gap: var(--space-16);">
-          <a href="#popular-tools" class="btn btn-filled" style="display: flex; align-items: center; gap: var(--space-8);">
-            <i data-lucide="compass" style="width: 20px; height: 20px;"></i>
+        <div class="hero-actions">
+          <a href="#popular-tools" class="btn btn-filled">
+            <i data-lucide="compass" class="btn-icon"></i>
             Explore All Tools
+          </a>
+          <a href="/docs" class="btn btn-primary">
+            <i data-lucide="book" class="btn-icon"></i>
+            Explore the docs
           </a>
         </div>
       </section>
 
       {/* Main Content Area with Sidebar Layout for AdSense Optimization */}
-      <main class="container" style="display: flex; gap: var(--space-32); padding-bottom: var(--space-64); flex-wrap: wrap;">
+      <main class="container main-grid">
 
         {/* Left Column: Content (70%) */}
-        <div style="flex: 1 1 65%; display: flex; flex-direction: column; gap: var(--space-48);">
+        <div class="main-content">
 
           {/* Popular Tools Grid */}
           <section id="popular-tools">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-24);">
+            <div class="flex-between section-header">
               <h2>Most Popular Tools</h2>
             </div>
 
@@ -106,29 +110,29 @@ app.get('/', (c) => {
               {toolsData.map((tool) => (
                 <div class={`tool-card tool-item-card data-cat-${tool.cat}`} data-status={tool.status}>
 
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-16);">
+                  <div class="tool-card-header">
                     {/* Replaced hardcoded inline colors with semantic monochrome classes */}
                     <span class={`tool-badge ${tool.status === 'live' ? 'badge-live' : 'badge-soon'}`}>
                       {tool.status === 'live' ? 'LIVE' : 'PIPELINE'}
                     </span>
 
                     {tool.searches && (
-                      <span style="font-size: var(--text-caption); font-weight: 500; color: var(--color-text-secondary); display: flex; align-items: center; gap: var(--space-4);">
+                      <span class="tool-searches">
                         {tool.searches}
                       </span>
                     )}
                   </div>
 
-                  <div style="flex-grow: 1;">
-                    <h3 style="margin-bottom: var(--space-8);">{tool.name}</h3>
-                    <p style="font-size: var(--text-xs);">{tool.desc}</p>
+                  <div class="tool-card-body">
+                    <h3>{tool.name}</h3>
+                    <p>{tool.desc}</p>
                   </div>
 
-                  <div style="margin-top: var(--space-24);">
+                  <div class="tool-card-footer">
                     {tool.status === 'live' ? (
-                      <a href={tool.path} class="btn btn-filled" style="width: 100%;">Open Tool</a>
+                      <a href={tool.path} class="btn btn-filled">Open Tool</a>
                     ) : (
-                      <button onclick={`alert('The ${tool.name} integration pipeline is active.')`} class="btn btn-filled" style="width: 100%;" disabled>
+                      <button onclick={`alert('The ${tool.name} integration pipeline is active.')`} class="btn btn-filled" disabled>
                         In Development
                       </button>
                     )}
@@ -138,34 +142,32 @@ app.get('/', (c) => {
             </div>
           </section>
 
-          {/* AdSense In-Feed / In-Article Placement */}
-          <div class="ad-placeholder" style="width: 100%; height: 250px;">
-            In-Feed / Rectangle Ad (Responsive)<br /><span style="font-size: 12px; font-weight: normal;">Optimal for CTR within content</span>
-          </div>
+
 
           {/* SEO Rich Content Section */}
-          <article class="category-card" style="cursor: default; transition: none; transform: none; background-color: var(--color-bg);">
-            <h2 style="margin-bottom: var(--space-16);">Why Use ToolStaq for Your Development Needs?</h2>
+          {/* SEO Rich Content Section */}
+          <article class="category-card seo-article">
+            <h2>Why Use ToolStaq for Your Development Needs?</h2>
 
-            <div style="color: var(--color-text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: var(--space-16);">
+            <div class="seo-content">
               <p>
                 In the fast-paced world of web development and digital marketing, having the right utilities at your fingertips can save countless hours. <strong>ToolStaq</strong> provides a comprehensive suite of completely free, client-side web tools designed to streamline your daily workflow without the need to install heavy software.
               </p>
 
-              <h3 style="margin-top: var(--space-16);">100% Free & Secure Client-Side Processing</h3>
+              <h3>100% Free & Secure Client-Side Processing</h3>
               <p>
                 We prioritize your privacy. The vast majority of our utilities, such as the <em>JSON Formatter</em>, <em>Regex Tester</em>, and <em>Text Encoders</em>, operate entirely within your browser. This means your sensitive data never leaves your device, ensuring maximum security and zero latency.
               </p>
 
-              <h3 style="margin-top: var(--space-16);">Essential Tools for Every Discipline</h3>
-              <ul style="padding-left: var(--space-24); list-style-type: disc; display: flex; flex-direction: column; gap: var(--space-8);">
+              <h3>Essential Tools for Every Discipline</h3>
+              <ul class="seo-list">
                 <li><strong>For Developers:</strong> Validate JSON, minify CSS/JS/HTML files, generate UUIDs, and encode URLs safely.</li>
                 <li><strong>For Designers:</strong> Extract color palettes, convert image formats (WEBP to PNG), and compress assets for faster page loads.</li>
                 <li><strong>For SEO Experts:</strong> Analyze meta tags, count words and characters, and generate clean schemas.</li>
                 <li><strong>For Network Admins:</strong> Check IP addresses, lookup DNS records, and format MAC addresses.</li>
               </ul>
 
-              <p style="margin-top: var(--space-16);">
+              <p>
                 Bookmark ToolStaq today and never waste time searching for individual "online calculators" or "formatters" again. Our unified dashboard puts everything you need in one, fast-loading interface.
               </p>
             </div>
@@ -173,19 +175,19 @@ app.get('/', (c) => {
         </div>
 
         {/* Right Column: Sidebar (30%) */}
-        <aside style="flex: 1 1 300px; display: flex; flex-direction: column; gap: var(--space-32);">
+        <aside class="main-sidebar">
 
           {/* Categories Widget */}
-          <div class="category-card" style="cursor: default; transition: none; transform: none; padding: var(--space-24);">
-            <h3 style="border-bottom: 2px solid var(--color-border); padding-bottom: var(--space-12); margin-bottom: var(--space-16);">Tool Categories</h3>
-            <ul style="display: flex; flex-direction: column; gap: var(--space-12); list-style: none; padding: 0;">
+          <div class="category-card sidebar-widget">
+            <h3 class="sidebar-widget-title">Tool Categories</h3>
+            <ul class="sidebar-widget-list">
               {categories.map((category) => {
                 const toolCount = toolsData.filter(t => t.cat === category.id).length;
                 return (
                   <li>
-                    <a href={`#popular-tools`} class="sidebar-category-link" style="display: flex; justify-content: space-between; align-items: center; color: var(--color-text); text-decoration: none; font-weight: 600;">
+                    <a href={`#popular-tools`} class="sidebar-category-link">
                       <span class="hover-underline">{category.name}</span>
-                      <span style="background: var(--color-bg); border: 2px solid var(--color-border); border-radius: var(--radius-button-lg); padding: 2px 8px; font-size: var(--text-caption); font-weight: 700;">{toolCount}</span>
+                      <span class="sidebar-category-count">{toolCount}</span>
                     </a>
                   </li>
                 );
@@ -193,12 +195,7 @@ app.get('/', (c) => {
             </ul>
           </div>
 
-          {/* AdSense Sidebar Unit (Sticky for high viewability) */}
-          <div style="position: sticky; top: 100px;">
-            <div class="ad-placeholder" style="width: 100%; height: 600px;">
-              Half Page / Skyscraper<br />(300 x 600)<br /><span style="font-size: 12px; font-weight: normal; margin-top: 8px; display: block;">Sticky Sidebar Ad<br />High Viewability</span>
-            </div>
-          </div>
+
 
         </aside>
 

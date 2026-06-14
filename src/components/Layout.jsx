@@ -52,29 +52,31 @@ export const Layout = (props) => (
       <script src="https://unpkg.com/lucide@latest"></script>
     </head>
     <body>
-      <header>
-        <a href="/" class="logo-link" id="home-logo">
-          <div class="logo-icon">T</div>
-          <span>ToolStaq</span>
-        </a>
+      <div class="bento-layout">
+        <header>
+          <a href="/" class="logo-link" id="home-logo">
+            <div class="logo-icon">T</div>
+            <span>ToolStaq</span>
+          </a>
 
-        <nav class="nav-links">
-          <a href="/tools/json" class="nav-link">JSON Formatter</a>
-          <a href="/tools/word-counter" class="nav-link">Word Counter</a>
-          <a href="/tools/password-generator" class="nav-link">Passwords</a>
-          <a href="/tools/base64" class="nav-link">Base64</a>
-        </nav>
-      </header>
+          <nav class="nav-links">
+            <a href="/tools/json" class="nav-link">JSON Formatter</a>
+            <a href="/tools/word-counter" class="nav-link">Word Counter</a>
+            <a href="/tools/password-generator" class="nav-link">Passwords</a>
+            <a href="/tools/base64" class="nav-link">Base64</a>
+          </nav>
+        </header>
 
-      <main>
-        {props.children}
-      </main>
+        <main>
+          {props.children}
+        </main>
 
-      <footer style="text-align: center; margin-top: 64px; padding: 48px 24px; border-top: 1px solid var(--color-border-muted);">
-        <p style="font-size: 13px; color: var(--color-text-muted);">
-          © {new Date().getFullYear()} ToolStaq.online. Powered by Edge Compute.
-        </p>
-      </footer>
+        <footer>
+          <p>
+            © {new Date().getFullYear()} ToolStaq.online. Powered by Edge Compute.
+          </p>
+        </footer>
+      </div>
     </body>
   </html>
 )
