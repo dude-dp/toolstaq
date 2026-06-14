@@ -5,9 +5,8 @@
 window.postMessage({ type: 'TOOLSTAQ_EXTENSION_INSTALLED' }, '*');
 
 // Also, inject a small script to set a global variable just in case
-const script = document.createElement('script');
-script.textContent = 'window.TOOLSTAQ_EXTENSION_ACTIVE = true;';
-(document.head || document.documentElement).appendChild(script);
+// Removed inline script injection due to Content Security Policy (CSP) restrictions.
+// The postMessage event above is sufficient to notify the frontend.
 
 // Listen for scrape requests from the ToolStaq UI
 window.addEventListener('message', (event) => {
