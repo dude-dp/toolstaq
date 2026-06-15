@@ -72,7 +72,7 @@ app.get('/', (c) => {
                 }
               }
             `}} />
-            
+
             {/* Hidden sizer to force the wrapper to be exactly as wide as the widest item */}
             <div class="ticker-sizer" aria-hidden="true">
               {categories.map((cat) => (
@@ -181,32 +181,6 @@ app.get('/', (c) => {
             </div>
           </article>
         </div>
-
-        {/* Right Column: Sidebar (30%) */}
-        <aside class="main-sidebar">
-
-          {/* Categories Widget */}
-          <div class="category-card sidebar-widget">
-            <h3 class="sidebar-widget-title">Tool Categories</h3>
-            <ul class="sidebar-widget-list">
-              {categories.map((category) => {
-                const toolCount = toolsData.filter(t => t.cat === category.id).length;
-                return (
-                  <li>
-                    <a href={`#popular-tools`} class="sidebar-category-link">
-                      <span class="hover-underline">{category.name}</span>
-                      <span class="sidebar-category-count">{toolCount}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-
-
-        </aside>
-
       </main>
     </Layout>
   )
