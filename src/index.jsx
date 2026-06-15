@@ -21,6 +21,18 @@ const app = new Hono()
 const { categories, tools: toolsDataRawList } = toolsDataRaw
 const toolsData = toolsDataRawList.filter(tool => tool.status === 'live')
 
+const parseSearches = (searchStr) => {
+  if (!searchStr) return 0;
+  const numStr = searchStr.replace(/[^0-9.]/g, '');
+  const num = parseFloat(numStr);
+  if (searchStr.includes('M')) return num * 1000000;
+  if (searchStr.includes('K')) return num * 1000;
+  return num;
+};
+const topTools = [...toolsDataRawList]
+  .sort((a, b) => parseSearches(b.searches) - parseSearches(a.searches))
+  .slice(0, 6);
+
 app.get('/', (c) => {
   return c.html(
     <Layout title="ToolStaq | Instant Developer Tools Hub">
@@ -114,38 +126,33 @@ app.get('/', (c) => {
               <h2>Most Popular Tools</h2>
             </div>
 
-            <div class="tools-grid">
-              {toolsData.map((tool) => (
-                <div class={`tool-card tool-item-card data-cat-${tool.cat}`} data-status={tool.status}>
-
-                  <div class="tool-card-header">
-                    {/* Replaced hardcoded inline colors with semantic monochrome classes */}
-                    <span class={`tool-badge ${tool.status === 'live' ? 'badge-live' : 'badge-soon'}`}>
-                      {tool.status === 'live' ? 'LIVE' : 'PIPELINE'}
-                    </span>
-
-                    {tool.searches && (
-                      <span class="tool-searches">
-                        {tool.searches}
-                      </span>
-                    )}
-                  </div>
-
-                  <div class="tool-card-body">
-                    <h3>{tool.name}</h3>
-                    <p>{tool.desc}</p>
-                  </div>
-
-                  <div class="tool-card-footer">
-                    {tool.status === 'live' ? (
-                      <a href={tool.path} class="btn btn-filled">Open Tool</a>
-                    ) : (
-                      <button onclick={`alert('The ${tool.name} integration pipeline is active.')`} class="btn btn-filled" disabled>
-                        In Development
-                      </button>
-                    )}
-                  </div>
+            {/* Google AdSense Banner */}
+            <div class="ad-banner-container">
+              <div class="ad-banner">
+                {/* Placeholder for Google AdSense */}
+                <span style="color: var(--color-text-secondary); font-size: 14px;">Advertisement</span>
+                <div style="margin-top: 8px; height: 90px; background-color: var(--color-bg-secondary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                  <span style="color: var(--color-text-secondary); font-size: 12px;">[Banner Ad Space]</span>
                 </div>
+              </div>
+            </div>
+
+            <div class="boxy-tools-grid">
+              {topTools.map((tool) => (
+                <a href={tool.status === 'live' ? tool.path : '#'} onclick={tool.status !== 'live' ? `alert('The ${tool.name} integration pipeline is active.'); return false;` : undefined} class={`boxy-tool-card data-cat-${tool.cat}`}>
+                  <div class="boxy-tool-preview">
+                    {/* Abstract preview box with lines */}
+                    <div style="display: flex; flex-direction: column; width: 100%; gap: 12px;">
+                      <div class="boxy-preview-line long"></div>
+                      <div class="boxy-preview-line medium"></div>
+                      <div class="boxy-preview-line short"></div>
+                    </div>
+                  </div>
+                  <div class="boxy-tool-info">
+                    <h3 class="boxy-tool-title">{tool.name}</h3>
+                    <span class="boxy-tool-badge">{tool.searches || 'New'}</span>
+                  </div>
+                </a>
               ))}
             </div>
           </section>
