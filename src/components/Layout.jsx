@@ -1,6 +1,8 @@
 /** @jsxRuntime automatic */
 /** @jsxImportSource hono/jsx */
 
+import { Footer } from './Footer';
+
 export const Layout = (props) => (
   <html lang="en">
     <head>
@@ -18,19 +20,6 @@ export const Layout = (props) => (
       {/* 💰 Google AdSense Publisher Script */}
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5823178475198610" crossorigin="anonymous"></script>
 
-      {/* BLOCKING FOUC SCRIPT: Reads local storage before the browser paints */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-        (function() {
-          try {
-            var savedTheme = localStorage.getItem('theme');
-            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-              document.documentElement.setAttribute('data-theme', 'dark');
-            }
-          } catch (e) {}
-        })();
-      `}} />
 
       {/* 🧠 SEO Structured Data (JSON-LD) */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{
@@ -71,11 +60,7 @@ export const Layout = (props) => (
           {props.children}
         </main>
 
-        <footer>
-          <p>
-            © {new Date().getFullYear()} ToolStaq.online. Powered by Edge Compute.
-          </p>
-        </footer>
+        <Footer />
       </div>
     </body>
   </html>
