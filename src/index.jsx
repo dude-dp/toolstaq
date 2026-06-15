@@ -139,7 +139,7 @@ app.get('/', (c) => {
 
             <div class="boxy-tools-grid">
               {topTools.map((tool) => (
-                <a href={tool.status === 'live' ? tool.path : '#'} onclick={tool.status !== 'live' ? `alert('The ${tool.name} integration pipeline is active.'); return false;` : undefined} class={`boxy-tool-card data-cat-${tool.cat}`}>
+                <a href={tool.status === 'live' ? tool.path : '#'} onclick={tool.status !== 'live' ? `window.showToast('The ${tool.name} pipeline is active.', 'warning'); return false;` : undefined} class={`boxy-tool-card data-cat-${tool.cat}`}>
                   <div class="boxy-tool-preview">
                     {/* Abstract preview box with lines */}
                     <div style="display: flex; flex-direction: column; width: 100%; gap: 12px;">
@@ -246,25 +246,43 @@ app.get('/docs', (c) => {
 app.get('/sitemap.xml', (c) => {
   const baseUrl = 'https://toolstaq.online';
 
-  // Filter only the live tools to prevent Google from crawling "coming soon" dead ends
-  const liveTools = toolsDataRaw.tools.filter(tool => tool.status === 'live');
+  // 1. Get all static GET routes registered in the Hono app
+  const appRoutes = app.routes
+    .filter(r => r.method === 'GET' && !r.path.includes(':') && !r.path.includes('*') && r.path !== '/sitemap.xml')
+    .map(r => r.path);
 
-  const toolUrls = liveTools.map(tool => `
+  // 2. Get all live tools from the JSON dataset
+  const liveTools = toolsDataRaw.tools
+    .filter(tool => tool.status === 'live')
+    .map(tool => tool.path);
+
+  // 3. Combine and deduplicate paths
+  const allPaths = [...new Set([...appRoutes, ...liveTools])];
+
+  const urlElements = allPaths.map(path => {
+    // Give homepage highest priority, top-level pages high priority, tools normal priority
+    let priority = '0.8';
+    let changefreq = 'weekly';
+    
+    if (path === '/') {
+      priority = '1.0';
+      changefreq = 'daily';
+    } else if (['/privacy', '/terms', '/contact', '/docs', '/categories'].includes(path)) {
+      priority = '0.9';
+      changefreq = 'monthly';
+    }
+
+    return `
     <url>
-      <loc>${baseUrl}${tool.path}</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-  `).join('');
+      <loc>${baseUrl}${path}</loc>
+      <changefreq>${changefreq}</changefreq>
+      <priority>${priority}</priority>
+    </url>`;
+  }).join('');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      <url>
-        <loc>${baseUrl}/</loc>
-        <changefreq>daily</changefreq>
-        <priority>1.0</priority>
-      </url>
-      ${toolUrls}
+      ${urlElements.trim()}
     </urlset>`;
 
   return c.text(xml.trim(), 200, {

@@ -62,6 +62,51 @@ export const Layout = (props) => (
 
         <Footer />
       </div>
+      {/* ── GLOBAL UI SCRIPTS ── */}
+      <script dangerouslySetInnerHTML={{ __html: `
+        window.showToast = function(message, type = 'info') {
+          // Initialize container if it doesn't exist
+          let container = document.getElementById('toast-container');
+          if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            container.className = 'toast-container';
+            document.body.appendChild(container);
+          }
+
+          // Create Toast Node
+          const toast = document.createElement('div');
+          toast.className = 'toast';
+          
+          // Monochromatic SVG Routing
+          let svgPath = '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>'; // Default info
+          
+          if (type === 'success') {
+            svgPath = '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+          } else if (type === 'warning') {
+            svgPath = '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>';
+          }
+
+          toast.innerHTML = \`
+            <div class="toast-icon">
+              <svg fill="none" viewBox="0 0 24 24">
+                \${svgPath}
+              </svg>
+            </div>
+            <span>\${message}</span>
+          \`;
+          
+          container.appendChild(toast);
+
+          // Animate out and clean up DOM after 3 seconds
+          setTimeout(() => {
+            toast.style.animation = 'toastFadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+            toast.addEventListener('animationend', () => {
+              if (container.contains(toast)) toast.remove();
+            });
+          }, 3000);
+        };
+      `}} />
     </body>
   </html>
 )
